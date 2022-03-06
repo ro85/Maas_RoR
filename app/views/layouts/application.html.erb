@@ -12,9 +12,23 @@
   </head>
 
   <body>
-    <%= render 'shared/navbar' %>
-    <%= render 'shared/flashes' %>
-
-    <%= yield %>
+    <% if  request.path == "/"  %>
+      <%= render 'shared/navbar' %>
+      <%= render 'shared/sidebar'%> 
+      <%= render 'shared/flashes' %>
+      <%= yield %>    
+    <% else %>
+      <div>
+        <%#= render 'shared/navbar' %>      
+        <%= render 'shared/sidebar'%>        
+        <%= render 'shared/flashes' %>
+        </div>
+        <div class="content-main">
+          <main>
+            <%= yield %>
+          </main>
+        </div>
+      </div>
+    <% end %>     
   </body>
 </html>

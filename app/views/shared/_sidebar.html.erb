@@ -1,0 +1,25 @@
+<% if current_user %>
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-head">
+      <div class="head mt-4 px-4">
+        <a class="head-link d-flex align-items-center justify-content-between">          
+        </a>
+      </div>
+    </div>
+    <div class="sidebar-info dropdown">
+      <%#= link_to profile_path, class:" text-decoration-none text-dark d-flex" do %>
+        <span class="info-name "><%= current_user.name.titleize %></span>
+      <%# end %>      
+    </div>
+    <div class="navigator mt-4 px-4">
+      <%= link_to contracts_path, class:"navigator-item #{'navigator-item-active' if request.path == contracts_path} primero text-decoration-none text-dark d-flex navigator-border " do %>
+        <p class="link-text">Contratos</p>
+        <i id="i-dash" class="fas fa-bars"></i>      
+      <% end %>
+      <%= link_to destroy_user_session_path, method: :delete, class:"navigator-item text-decoration-none text-dark d-flex navigator-border " do %>
+        <p class="link-textc">Salir</p>
+        <i id="i-dash" class="fas fa-sign-out-alt"></i>
+      <% end %>      
+    </div>    
+  </nav>  
+<%end%>
