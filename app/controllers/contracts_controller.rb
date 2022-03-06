@@ -19,4 +19,9 @@ class ContractsController < ApplicationController
     end       
   end
 
+  def new
+    @contract = Contract.new
+    authorize @contract
+  end
+
 end
