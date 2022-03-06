@@ -1,0 +1,11 @@
+<h3>Nuevo Contrato</h3>  
+<hr>
+
+<%= simple_form_for @contract do |f| %>
+  <%= f.input :client_name  %>
+  <%#= simple_fields_for :price_courier do |f| %>
+
+    <%= f.submit "Crear", class:"btn btn-primary", id:"btn", data:{confirm: "Grabar Alta"} %>
+  <%# end %>
+
+<% end %>

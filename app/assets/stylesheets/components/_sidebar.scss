@@ -1,0 +1,294 @@
+
+:root {
+  --sizesidebar: 18rem;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans&display=swap');
+
+body{
+  background-color: #eceff1;
+}
+
+#i-dash{
+  color: black;
+  opacity: 0.3;
+  font-size: 18px;
+  position: absolute;
+  top: 25%;
+  right: 8px;
+}
+
+#i-dash-bell{
+  color: black;
+  font-size: 25px;
+  position: absolute;
+  top: 14%;
+  right: 32px;
+}
+
+.primero{
+  border-top: 1px solid #dadada;
+}
+
+.navigator-item{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 8px;
+ 
+  margin-top: 0px;
+  margin-bottom: 0px;
+  position: relative;
+  height: 45px;
+  
+}
+
+.navigator-border{
+  border-bottom: 1px solid  #dadada;
+
+  &:hover{
+    border-left: 3px solid   #1BCB7F ;
+  }
+}
+
+.navigator-item-active{
+  border-left: 3px solid   #1BCB7F ;
+
+  p{
+    color:  #1BCB7F;
+  }
+  
+  #i-dash{
+    color:  #1BCB7F;
+    opacity: 0.8;
+  }
+
+  
+}
+
+
+.borders{
+  border-left: 3px transparent;
+
+  &:hover{
+    border-left: 3px  #1BCB7F;
+  }
+
+}
+
+.navigator{
+  p{
+    display: flex;
+    align-items: center;
+  }
+}
+
+p{
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  
+  margin: 0;
+  color: #212037;
+}
+
+.foto{
+  background-color: white ;
+  height: 100vh;
+  padding-top: 30px;
+  border-radius: 0px 60px 0px 0px;
+}
+
+main{
+  margin-left: var(--sizesidebar);
+  width:  calc(100%-var(--sizesidebar));
+  padding: 1rem;
+}
+
+.sidebar{
+  font-family: 'DM Sans';
+  width: var(--sizesidebar);
+  height: 100vh;
+  position: fixed;
+  background-color:white;
+  transition: 250ms ease;
+  align-items: center;
+
+
+  .sidebar-head{
+    color:#1DBD92;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sidebar-info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+  }
+
+  .sidebar-event{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .sidebar-nav{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav-item{
+    width: 100%;
+  }
+
+  .head{
+    width: 100%;
+  }
+
+  .event-header{
+    font-weight: bold;
+   
+  }
+
+  .nav-link{
+    position: relative;
+    margin-left: 8px;
+    //display: flex;
+    //align-items: center;
+    //justify-content: space-between;
+    padding: 8px 20px;
+
+  }
+
+  .head-link{
+    
+  }
+
+  .link-text{
+   
+  }
+
+  .head-text{
+    margin-left: 0.5rem;
+    margin-right: 1rem;
+    margin-left: auto;
+    display: block;
+  }
+
+  .head-img{
+    height: 40px;
+    width: 40px;
+    margin-bottom: 4px;
+  }
+
+  .nav-link .link-bell{
+    font-size: 2rem;
+    margin-left: 0.5rem;
+  }
+
+  .info-avatar{
+    background-color:#C4C4C4;
+    padding: 3px;
+    display: block;
+    border-radius: 50%;
+    border: 4px solid white;
+    height: 100px;
+    width: 100px;
+  }
+
+  .info-name{
+    font-size: 18px;
+    font-weight: bold;
+    display: block;
+    //color:#1DBD92 ;
+    color:  #1BCB7F
+  }
+
+  .info-type{
+    font-size: 14px;
+    display: block;
+  }
+
+  .navbar-toggler-icon{
+    height: 40px;
+    width: 3.5rem;
+  }
+
+  .event{
+    font-size: 14px;
+    display: block;
+  }
+
+  .event-item{
+    display: flex;
+    flex-direction: row;
+    margin: 0 4px;
+    text-align: center;
+    margin-bottom: 1rem;
+
+    width: 13rem;
+  }
+
+  .event-date{
+    color: #1DBD92;
+    font-weight: bold;
+    background-color: #DAF2EC;
+    border-radius: 25%;
+    margin-right: 0.5rem;
+    padding: 0.1rem 0.4rem;
+    display: flex;
+    flex-direction: column;
+    
+  }
+
+  #logo{
+    width: 110px;
+    margin-left: 100px;
+  }
+
+  .event-assig{
+   
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+  }
+
+  .date-assig{
+    font-weight: bold;
+  }
+
+  .date-day{
+    color: #A5A5B2;
+    font-weight: bold;
+  }
+ 
+}
+
+@media (max-width: 768px) {
+  main{
+    margin-left: 4px;
+    padding: 1rem;
+  }
+
+  #sidebar {
+      display: none;
+  }
+
+ 
+}
