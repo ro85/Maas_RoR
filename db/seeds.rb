@@ -23,3 +23,35 @@ p barbara
 benjamin = User.new(name:"Benjamín", email:"benjamin@mail.com", password:"123456")
 benjamin.save!
 p benjamin
+
+if Weekday.count != 7
+  Weekday.destroy_all
+  d = Weekday.new(weekday:"Domingo")
+  d.save!
+  p d
+
+  l = Weekday.new(weekday:"Lunes")
+  l.save!
+  p l
+
+  ma = Weekday.new(weekday:"Martes")
+  ma.save!
+  p ma
+
+  mie = Weekday.new(weekday:"Miercoles")
+  mie.save!
+  p mie
+
+  j = Weekday.new(weekday:"Jueves")
+  j.save!
+  p j
+
+  v = Weekday.new(weekday:"Viernes")
+  v.save!
+  p v
+
+  s = Weekday.new(weekday:"Sabado")
+  s.save!
+  p  s
+end
+

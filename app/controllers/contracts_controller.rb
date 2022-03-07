@@ -21,7 +21,13 @@ class ContractsController < ApplicationController
 
   def new
     @contract = Contract.new
+    @weekdays = Weekday.all
     authorize @contract
+  end
+
+  def create
+    raise
+
   end
 
 end

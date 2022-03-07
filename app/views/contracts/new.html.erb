@@ -3,9 +3,17 @@
 
 <%= simple_form_for @contract do |f| %>
   <%= f.input :client_name  %>
-  <%#= simple_fields_for :price_courier do |f| %>
-
-    <%= f.submit "Crear", class:"btn btn-primary", id:"btn", data:{confirm: "Grabar Alta"} %>
-  <%# end %>
-
+  <% @weekdays.each do |weekday| %>
+    <%= simple_fields_for :weekday_setup do |f| %>      
+      <%= f.label weekday.weekday %>
+      <div-d class="flex">
+        <%= f.input :start_of_monitoring, as: :time, html5: true %>
+        <%= f.input :end_of_monitoring, as: :time, html5: true %>
+      </div-d>       
+    <% end %>
+  <% end %>
+  
+  
 <% end %>
+
+
