@@ -48,7 +48,7 @@
           <tr class="contratos">
             <td><%= contract.id %></td>              
             <td><%= contract.created_at.strftime('%d/%m/%Y') %></td>           
-            <td><%= contract.user.name.titleize %></td>            
+            <td><%= contract.client_name.titleize %></td>            
             <td>
               <%= link_to contract_path(contract), title:"ver +", class: "text-decoration-none " do %>
                 <i class="far fa-eye mx-4 icon-order text-decoration-none text-dark"></i>                 

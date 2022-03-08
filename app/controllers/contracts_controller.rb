@@ -19,9 +19,20 @@ class ContractsController < ApplicationController
     end       
   end
 
+  def show
+    @contract = Contract.find(params[:id])
+    @total_hs = []
+    @contract.weekday_setups.each do |weekday_setup|
+      @total_hs << ((weekday_setup.end_of_monitoring.to_time.to_i - weekday_setup.start_of_monitoring.to_time.to_i).abs/60/60)
+    end
+    authorize @contract
+  end
+
   def new
     @contract = Contract.new
     @weekdays = Weekday.all
+    @weekday_setup = WeekdaySetup.new
+    7.times { @contract.weekday_setups.build }
     authorize @contract
   end
 
