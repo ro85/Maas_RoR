@@ -6,4 +6,10 @@ Rails.application.routes.draw do
   resources :contracts do
     resources :weekday_setups, only: [:edit, :update]
   end
+
+  resources :monitoring_shifts do 
+    collection do
+      patch 'tildar_todas'
+    end
+  end
 end

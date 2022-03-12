@@ -18,8 +18,7 @@
                   <%#=  render "contracts/partials/modal-create-price-courier" %>    
                 </div>               
               </tr>
-              <tr class="liquidaciones">
-                <th class="text-center">Id</th>          
+              <tr class="liquidaciones">                
                 <th>Dia</th>    
                 <th>Hora Inicio</th>              
                 <th>Hora Fin</th>
@@ -29,8 +28,7 @@
             </thead>
             <tbody>
               <% @contract.weekday_setups.each do |weekday_setup| %>              
-                <tr class="liquidaciones">             
-                  <th class="text-center"><%= weekday_setup.id %></th>          
+                <tr class="liquidaciones">                       
                   <td><%= weekday_setup.weekday.weekday.titleize %></td>           
                   <td><%= weekday_setup.start_of_monitoring.strftime('%R Hs') %></td>    
                   <td><%= (weekday_setup.end_of_monitoring.strftime('%R').last(2) == "59" ? weekday_setup.end_of_monitoring + 60 : weekday_setup.end_of_monitoring).strftime('%R Hs') %></td>
@@ -38,8 +36,11 @@
                     <%= (weekday_setup.end_of_monitoring.to_time.to_i - weekday_setup.start_of_monitoring.to_time.to_i).abs/60/60  %>           
                   </td>        
                   <td>
-                    <!-- Button trigger modal -->                    
-                    <i class="far fa-edit" data-bs-toggle="modal" data-bs-target="#editModal-<%= weekday_setup.id %>"></i>
+                    <!-- Button trigger modal -->   
+                    <% if current_user.admin? %>
+                      <i class="far fa-edit" data-bs-toggle="modal" data-bs-target="#editModal-<%= weekday_setup.id %>"></i>
+                    <% end %>                 
+                    
                     <!-- Modal -->
                     <div class="modal fade" id="editModal-<%= weekday_setup.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog" role="document">
@@ -67,7 +68,7 @@
                 </tr>                   
               <% end %> 
               <tr>
-                <td colspan=2><strong>Total horas del contrato</strong></td>
+                <td colspan=1><strong>Total horas semanal</strong></td>
                 <td></td>
                 <td></td>
                 <td class="text-center"><strong><%=@total_hs.sum %></strong></td>

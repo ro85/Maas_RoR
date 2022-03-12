@@ -16,6 +16,14 @@
         <p class="link-text">Contratos</p>
         <i id="i-dash" class="fas fa-bars"></i>      
       <% end %>
+      <%= link_to monitoring_shifts_path, class:"navigator-item #{'navigator-item-active' if request.path == monitoring_shifts_path} primero text-decoration-none text-dark d-flex navigator-border " do %>
+        <p class="link-text">Disponibilidad</p>         
+        <i id="i-dash" class="fas fa-calendar-plus"></i>
+      <% end %>
+      <%= link_to contracts_path, class:"navigator-item #{'navigator-item-active' if request.path == contracts_path} primero text-decoration-none text-dark d-flex navigator-border " do %>
+        <p class="link-text">Turnos Confirmados</p>
+        <i  id="i-dash" class="fas fa-calendar-check"></i>        
+      <% end %>
       <%= link_to destroy_user_session_path, method: :delete, class:"navigator-item text-decoration-none text-dark d-flex navigator-border " do %>
         <p class="link-textc">Salir</p>
         <i id="i-dash" class="fas fa-sign-out-alt"></i>

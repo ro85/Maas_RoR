@@ -58,34 +58,34 @@ if Weekday.count != 7
   p  s
 end
 
-contract = Contract.new(client_name: "recorrido.cl")
-contract.save!
-p contract
+# contract = Contract.new(client_name: "recorrido.cl")
+# contract.save!
+# p contract
 
-weekday_setup1 = WeekdaySetup.new(weekday_id:1 , start_of_monitoring: "10:00", end_of_monitoring: "00:00", contract_id: contract.id)
-weekday_setup1.save!
-p weekday_setup1
+# weekday_setup1 = WeekdaySetup.new(weekday_id:1 , start_of_monitoring: "10:00", end_of_monitoring: "00:00", contract_id: contract.id)
+# weekday_setup1.save!
+# p weekday_setup1
 
-weekday_setup2 = WeekdaySetup.new(weekday_id:2 , start_of_monitoring: "19:00", end_of_monitoring: "00:00", contract_id: contract.id)
-weekday_setup2.save!
-p weekday_setup2
+# weekday_setup2 = WeekdaySetup.new(weekday_id:2 , start_of_monitoring: "19:00", end_of_monitoring: "00:00", contract_id: contract.id)
+# weekday_setup2.save!
+# p weekday_setup2
 
-weekday_setup3 = WeekdaySetup.new(weekday_id:3 , start_of_monitoring: "19:00", end_of_monitoring: "00:00", contract_id: contract.id)
-weekday_setup3.save!
-p weekday_setup3
+# weekday_setup3 = WeekdaySetup.new(weekday_id:3 , start_of_monitoring: "19:00", end_of_monitoring: "00:00", contract_id: contract.id)
+# weekday_setup3.save!
+# p weekday_setup3
 
-weekday_setup4 = WeekdaySetup.new(weekday_id:4 , start_of_monitoring: "19:00", end_of_monitoring: "00:00", contract_id: contract.id)
-weekday_setup4.save!
-p weekday_setup4
+# weekday_setup4 = WeekdaySetup.new(weekday_id:4 , start_of_monitoring: "19:00", end_of_monitoring: "00:00", contract_id: contract.id)
+# weekday_setup4.save!
+# p weekday_setup4
 
-weekday_setup5 = WeekdaySetup.new(weekday_id:5 , start_of_monitoring: "19:00", end_of_monitoring: "00:00", contract_id: contract.id)
-weekday_setup5.save!
-p weekday_setup5
+# weekday_setup5 = WeekdaySetup.new(weekday_id:5 , start_of_monitoring: "19:00", end_of_monitoring: "00:00", contract_id: contract.id)
+# weekday_setup5.save!
+# p weekday_setup5
 
-weekday_setup6 = WeekdaySetup.new(weekday_id:6 , start_of_monitoring: "19:00", end_of_monitoring: "00:00", contract_id: contract.id)
-weekday_setup6.save!
-p weekday_setup6
+# weekday_setup6 = WeekdaySetup.new(weekday_id:6 , start_of_monitoring: "19:00", end_of_monitoring: "00:00", contract_id: contract.id)
+# weekday_setup6.save!
+# p weekday_setup6
 
-weekday_setup7 = WeekdaySetup.new(weekday_id:7 , start_of_monitoring: "10:00", end_of_monitoring: "00:00", contract_id: contract.id)
-weekday_setup7.save!
-p weekday_setup7
+# weekday_setup7 = WeekdaySetup.new(weekday_id:7 , start_of_monitoring: "10:00", end_of_monitoring: "00:00", contract_id: contract.id)
+# weekday_setup7.save!
+# p weekday_setup7
