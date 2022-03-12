@@ -1,7 +1,7 @@
-class ContractPolicy < ApplicationPolicy
+class MonitoringShiftPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope.all
+      scope.where(user: user)
     end
   end
 
@@ -16,4 +16,9 @@ class ContractPolicy < ApplicationPolicy
   def create?
     true
   end
+
+  def tildar_todas?
+    true
+  end
+
 end
