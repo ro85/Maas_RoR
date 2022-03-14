@@ -17,6 +17,10 @@ class MonitoringShiftPolicy < ApplicationPolicy
     true
   end
 
+  def update?
+    true
+  end
+
   def tildar_todas?
     true
   end

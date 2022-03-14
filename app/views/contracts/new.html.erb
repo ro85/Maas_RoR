@@ -4,37 +4,38 @@
 <%= simple_form_for @contract do |f| %>
   <%= f.input :client_name  %>
  
-      <div-d class="flex">
+      <div class="d-flex">
         <%= f.input :start_date, as: :date, html5: true %>
         <%= f.input :end_date, as: :date, html5: true %>
-      <div-d class="flex">
-        <%= f.input :sunday_start_hour, as: :time, html5: true %>
-        <%= f.input :sunday_end_hour, as: :time, html5: true %>
-      </div-d>     
-      <div-d class="flex">
+      </div>        
+      <div class="d-flex">
         <%= f.input :monday_start_hour, as: :time, html5: true %>
         <%= f.input :monday_end_hour, as: :time, html5: true %>
-      </div-d>
-      <div-d class="flex">
+      </div>
+      <div class="d-flex">
         <%= f.input :tuesday_start_hour, as: :time, html5: true %>
         <%= f.input :tuesday_end_hour, as: :time, html5: true %>
-      </div-d>
-      <div-d class="flex">
+      </div>
+      <div class="d-flex">
         <%= f.input :wednesday_start_hour, as: :time, html5: true %>
         <%= f.input :wednesday_end_hour, as: :time, html5: true %>
-      </div-d>
-      <div-d class="flex">
+      </div>
+      <div class="d-flex">
         <%= f.input :thursday_start_hour, as: :time, html5: true %>
         <%= f.input :thursday_end_hour, as: :time, html5: true %>
-      </div-d>
-      <div-d class="flex">
+      </div>
+      <div class="d-flex">
         <%= f.input :friday_start_hour, as: :time, html5: true %>
         <%= f.input :friday_end_hour, as: :time, html5: true %>
-      </div-d>
-      <div-d class="flex">
+      </div>
+      <div class="d-flex">
         <%= f.input :saturday_start_hour, as: :time, html5: true %>
         <%= f.input :saturday_end_hour, as: :time, html5: true %>
-      </div-d>  
+      </div> 
+      <div class="d-flex">
+        <%= f.input :sunday_start_hour, as: :time, html5: true %>
+        <%= f.input :sunday_end_hour, as: :time, html5: true %>
+      </div>    
    
   
   <%= f.submit "Crear", class:"btn btn-primary", id:"btn", data:{confirm: "Grabar Alta"} %>

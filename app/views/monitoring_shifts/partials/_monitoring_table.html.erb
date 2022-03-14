@@ -5,16 +5,31 @@
     </tr>
     <table class="table table-hover">                 
       <tbody>                                           
-        <%  @monitoring_shifts.where(date: @date).order(:id).each do |shift_info| %>           
-          <%= simple_form_for shift_info, url: edit_monitoring_shift_path(shift_info), method: :patch do |f| %>
-            <tr class="liquidaciones"> 
-              <td><%= shift_info.start_hour.strftime('%R Hs') %> - <%= shift_info.end_hour.strftime('%R Hs') %></td>     
-              <td><%= f.input  :available, label: false %></td>              
-              <%= f.submit :style => "display: none;" %>                     
-            </tr>  
-          <% end %>
+        <%  @monitoring_shifts.where(date: @date).order(:id).each do |shift_info| %> 
+          <tr class="liquidaciones">           
+                         
+              <td><%= shift_info.start_hour.strftime('%R Hs') %> - <%= shift_info.end_hour.strftime('%R Hs') %></td>
+              <td><%= shift_info.available %></td> 
+              <td>
+                <div class="form-check">
+                  <% if shift_info.available? %>
+                    <input class="form-check-input" type="checkbox" value="<%= shift_info.available %>" id="flexCheckDefault" data-available="<%= shift_info.available %>" data-id="<%= shift_info.id %>" checked>  
+                  <% else %>
+                    <input class="form-check-input" type="checkbox" value="<%= shift_info.available %>" id="flexCheckDefault" data-available="<%= shift_info.available %>" data-id="<%= shift_info.id %> ">  
+                  <% end %>                                  
+                </div>
+              </td>   
+              <td><%= check_box_tag 'monitoring_shifts_ids[]', shift_info.id %></td> 
+               
+              <%#= simple_form_for shift_info, html: { id: "form", data: "#{shift_info.id}" }, url: monitoring_shift_path(shift_info), method: :PATCH do |f| %> 
+               
+                <td><%#= f.check_box :available, label: false, id:"available_#{shift_info.id}" %></td>              
+                <%#= f.submit :style => "display: none;" %>                
+              <%# end %>
+          </tr> 
         <% end %>                               
       </tbody>         
     </table>   
   </thead>   
 </table>
+
