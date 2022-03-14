@@ -5,5 +5,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :name, presence: true
+  has_many :user_monitoring_shifts
+  has_many :monitoring_shifts
+
+  validates :name, presence: true  
+
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_13_161511) do
+ActiveRecord::Schema.define(version: 2022_03_14_150825) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 2022_03_13_161511) do
     t.time "saturday_end_hour"
     t.time "sunday_start_hour"
     t.time "sunday_end_hour"
+    t.float "price_per_hour"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -41,8 +42,7 @@ ActiveRecord::Schema.define(version: 2022_03_13_161511) do
     t.time "start_hour"
     t.time "end_hour"
     t.integer "duration"
-    t.bigint "user_id", null: false
-    t.boolean "available", default: false
+    t.bigint "user_id"
     t.date "date"
     t.integer "week_number"
     t.bigint "contract_id", null: false
@@ -50,6 +50,16 @@ ActiveRecord::Schema.define(version: 2022_03_13_161511) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["contract_id"], name: "index_monitoring_shifts_on_contract_id"
     t.index ["user_id"], name: "index_monitoring_shifts_on_user_id"
+  end
+
+  create_table "user_monitoring_shifts", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "monitoring_shift_id", null: false
+    t.boolean "available", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["monitoring_shift_id"], name: "index_user_monitoring_shifts_on_monitoring_shift_id"
+    t.index ["user_id"], name: "index_user_monitoring_shifts_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -62,6 +72,7 @@ ActiveRecord::Schema.define(version: 2022_03_13_161511) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"
     t.boolean "admin", default: false
+    t.boolean "dev", default: false
     t.string "authentication_token", limit: 30
     t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -87,6 +98,8 @@ ActiveRecord::Schema.define(version: 2022_03_13_161511) do
 
   add_foreign_key "monitoring_shifts", "contracts"
   add_foreign_key "monitoring_shifts", "users"
+  add_foreign_key "user_monitoring_shifts", "monitoring_shifts"
+  add_foreign_key "user_monitoring_shifts", "users"
   add_foreign_key "weekday_setups", "contracts"
   add_foreign_key "weekday_setups", "weekdays"
 end

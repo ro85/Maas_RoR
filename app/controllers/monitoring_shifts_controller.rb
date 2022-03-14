@@ -1,17 +1,18 @@
 class MonitoringShiftsController < ApplicationController
   
   def index
-    @monitoring_shifts = policy_scope(MonitoringShift).includes(:user)
+    @monitoring_shifts = policy_scope(MonitoringShift)
+    
     @weeks = ["semana"]  
     @dates = []  
     @dates_weekend = []
-    @monitoring_shifts.each do |shift|
+    MonitoringShift.all.each do |shift|
       @weeks << shift.week_number      
     end 
     
     if params[:query].present?     
       sql_query = "monitoring_shifts.week_number ILIKE :query"
-      @monitoring_shifts = policy_scope(MonitoringShift).includes(:user).where(week_number: params[:query].to_i)    
+      @monitoring_shifts = policy_scope(MonitoringShift).where(week_number: params[:query].to_i)    
       @monitoring_shifts.each do |shift| 
         if shift.date.saturday? || shift.date.sunday?  
           @dates_weekend << shift.date       
@@ -43,18 +44,20 @@ class MonitoringShiftsController < ApplicationController
     authorize @monitoring_shift
   end
 
-  def tildar_todas    
-    params[:monitoring_shifts_ids].each do |shift_id|
-      @monitoring_shift = MonitoringShift.find(shift_id.to_i)
-      @week_shifts = MonitoringShift.where(week_number: @monitoring_shift.week_number).where(user_id: @monitoring_shift.user_id )
-      if @week_shifts.include?(@monitoring_shift)
-        @monitoring_shift.update(available: true)
-      else
-        @monitoring_shift.update(available: false)
-      end      
+  def tildar_todas   
+    
+    params[:user_monitoring_shifts_ids].each do |shift_id|
+      @user_monitoring_shift = UserMonitoringShift.find(shift_id.to_i)
+      @week = @user_monitoring_shift.monitoring_shift
+      @monitoring_shifts = MonitoringShift.where(week_number: @week)
+      if @monitoring_shifts.include?(@user_monitoring_shift.monitoring_shift_id)
+      raise
+      end
+      @shifts_of_week = UserMonitoringShift.where()  
+      @user_monitoring_shift.update(available: true)          
     end
-    authorize @monitoring_shift
-    redirect_to "/monitoring_shifts?query=#{@monitoring_shift.week_number}"
+    authorize @user_monitoring_shift
+    redirect_to "/monitoring_shifts?query=#{@user_monitoring_shift.monitoring_shift.week_number}"
     
     
 

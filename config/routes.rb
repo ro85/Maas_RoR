@@ -17,4 +17,10 @@ Rails.application.routes.draw do
       patch 'tildar_todas'
     end
   end
+
+  resources :user_monitoring_shifts do
+    collection do
+      patch 'mark_as_available'
+    end
+  end
 end

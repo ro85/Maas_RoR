@@ -1,0 +1,2 @@
+class UserMonitoringShiftsController < ApplicationController
+end

@@ -1,9 +1,12 @@
-class MonitoringShiftPolicy < ApplicationPolicy
+class UserMonitoringShiftPolicy < ApplicationPolicy
+  
   class Scope < Scope
-    def resolve    
-      scope.all      
+    if @user.admin?
+      scope.all
+    else
+      scope.where(user: @user)
     end
-  end 
+  end
 
   def show?
     true
@@ -21,7 +24,7 @@ class MonitoringShiftPolicy < ApplicationPolicy
     true
   end
 
-  def tildar_todas?
+  def mark_as_available?
     true
   end
 
