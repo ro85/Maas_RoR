@@ -4,8 +4,7 @@ class CreateMonitoringShifts < ActiveRecord::Migration[6.0]
       t.time :start_hour
       t.time :end_hour
       t.integer :duration
-      t.references :user, null: false, foreign_key: true
-      t.boolean :available, :default => false 
+      t.references :user, null: true, foreign_key: true       
       t.date :date
       t.integer :week_number
       t.references :contract, null: false, foreign_key: true

@@ -18,7 +18,8 @@ class CreateContracts < ActiveRecord::Migration[6.0]
       t.time :saturday_end_hour
       t.time :sunday_start_hour
       t.time :sunday_end_hour
-
+      t.float :price_per_hour
+      
       t.timestamps
     end
   end

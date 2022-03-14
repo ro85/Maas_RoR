@@ -11,19 +11,19 @@ Contract.destroy_all
 User.destroy_all
 
 
-admin = User.new(name:"Rodrigo", admin:true, email:"admin@mail.com", password:"123456")
+admin = User.new(name:"Rodrigo", admin:true, email:"admin@mail.com", password:"123456", dev: false)
 admin.save!
 p admin
 
-ernesto = User.new(name:"Ernesto", email:"ernesto@mail.com", password:"123456")
+ernesto = User.new(name:"Ernesto", email:"ernesto@mail.com", password:"123456", dev: true)
 ernesto.save!
 p ernesto
 
-barbara = User.new(name:"Bárbara", email:"barbara@mail.com", password:"123456")
+barbara = User.new(name:"Bárbara", email:"barbara@mail.com", password:"123456", dev: true)
 barbara.save!
 p barbara
 
-benjamin = User.new(name:"Benjamín", email:"benjamin@mail.com", password:"123456")
+benjamin = User.new(name:"Benjamín", email:"benjamin@mail.com", password:"123456", dev: true)
 benjamin.save!
 p benjamin
 

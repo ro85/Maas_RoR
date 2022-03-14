@@ -1,9 +1,9 @@
 class MonitoringShiftPolicy < ApplicationPolicy
   class Scope < Scope
-    def resolve
-      scope.where(user: user)
+    def resolve    
+      scope.all      
     end
-  end
+  end 
 
   def show?
     true
@@ -14,6 +14,10 @@ class MonitoringShiftPolicy < ApplicationPolicy
   end
 
   def create?
+    true
+  end
+
+  def update?
     true
   end
 

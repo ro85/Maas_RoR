@@ -14,8 +14,7 @@
             <thead>
               <tr>
                 <div class="d-flex justify-content-between">
-                  <h5 class="ml-3 mr-5 mt-2"><strong><%= @contract.id %> - <%= @contract.client_name.titleize %></strong></h5>
-                  <%#=  render "contracts/partials/modal-create-price-courier" %>    
+                  <h5 class="ml-3 mr-5 mt-2"><strong><%= @contract.id %> - <%= @contract.client_name.titleize %></strong></h5>                 
                 </div>               
               </tr>
               <tr class="liquidaciones">                
@@ -27,51 +26,19 @@
               </tr>
             </thead>
             <tbody>
-              <% @contract.weekday_setups.each do |weekday_setup| %>              
-                <tr class="liquidaciones">                       
-                  <td><%= weekday_setup.weekday.weekday.titleize %></td>           
-                  <td><%= weekday_setup.start_of_monitoring.strftime('%R Hs') %></td>    
-                  <td><%= (weekday_setup.end_of_monitoring.strftime('%R').last(2) == "59" ? weekday_setup.end_of_monitoring + 60 : weekday_setup.end_of_monitoring).strftime('%R Hs') %></td>
-                  <td class="text-center">
-                    <%= (weekday_setup.end_of_monitoring.to_time.to_i - weekday_setup.start_of_monitoring.to_time.to_i).abs/60/60  %>           
-                  </td>        
-                  <td>
-                    <!-- Button trigger modal -->   
-                    <% if current_user.admin? %>
-                      <i class="far fa-edit" data-bs-toggle="modal" data-bs-target="#editModal-<%= weekday_setup.id %>"></i>
-                    <% end %>                 
-                    
-                    <!-- Modal -->
-                    <div class="modal fade" id="editModal-<%= weekday_setup.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Editar Alta</h5>
-                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <%= simple_form_for [@contract, weekday_setup], method: :PATCH do |f|  %>
-                            <div class="modal-body">        
-                              <%= f.input :start_of_monitoring, as: :time, html5: true %>
-                              <%= f.input :end_of_monitoring, as: :time, html5: true %> 
-                            </div>  
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                              <%= submit_tag "Grabar", class:"btn btn-primary" %>
-                            </div>
-                          <% end %>
-                        </div>
-                      </div>
-                    </div>                             
-                  </td>           
-                </tr>                   
-              <% end %> 
+              <% @week_days = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sabado", "Domingo"] %>
+              <%= render 'contracts/partials/monday_info' %>            
+              <%= render 'contracts/partials/tuesday_info' %>
+              <%= render 'contracts/partials/wednesday_info' %>
+              <%= render 'contracts/partials/thursday_info' %>
+              <%= render 'contracts/partials/friday_info' %>
+              <%= render 'contracts/partials/saturday_info' %>
+              <%= render 'contracts/partials/sunday_info' %>               
               <tr>
                 <td colspan=1><strong>Total horas semanal</strong></td>
                 <td></td>
                 <td></td>
-                <td class="text-center"><strong><%=@total_hs.sum %></strong></td>
+                <td class="text-center"><strong><%=@contract.total_hours_per_week %></strong></td>
                 <td></td>
               </tr>                
             </tbody>         
