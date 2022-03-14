@@ -33,7 +33,7 @@
           <div class="d-flex justify-content-between">
             <h5 class="ml-3 mr-5 my-2"><strong>Semana <%= params[:query] %> -  del <%#= @monitoring_shifts.first.date.strftime('%A, %d de %B de %Y') %> a <%#= @monitoring_shifts.last.date.strftime('%A, %d de %B de %Y')  %></strong></h5>             
           </div>
-          <%= simple_form_for @monitoring_shift, url: tildar_todas_monitoring_shifts_path, remote: true, method: :patch do |f| %>
+          <%= simple_form_for @monitoring_shift, url: mark_as_available_user_monitoring_shifts_path, remote: true, method: :patch do |f| %>
             <div class="container">
               <%= f.submit "Grabar", class:"btn btn-primary my-3" %>                            
               <div class="row">
@@ -61,34 +61,6 @@
   </div>    
 </div>
 
-<script>
-  const a = document.querySelectorAll("input")
- 
-    a.forEach((input) =>{
-    input.addEventListener('click', (event) =>{
-      const inputId = input.dataset.id
-      const inputAvailable = input.dataset.available
-      console.log(inputId)
-      console.log(inputAvailable)
-      const monitoringShift = {
-        id: inputId,
-        available: inputAvailable        
-      }
-      fetch (`https://monitoring_shifts/${inputId}`,{
-        method: "PATCH",
-        headers: {"Content-Type":"application/json",
-        Authorization: "vtSPjc6tPgGNpzPyc3z7"},
-        body: JSON.stringify(monitoringShift)
-      })
-      
-       
-    })
-    
-  });
-
- 
- 
-</script>
 
 
 

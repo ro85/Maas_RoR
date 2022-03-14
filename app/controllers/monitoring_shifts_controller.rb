@@ -42,24 +42,5 @@ class MonitoringShiftsController < ApplicationController
     redirect_to "/monitoring_shifts?query=#{@monitoring_shift.week_number}"
         
     authorize @monitoring_shift
-  end
-
-  def tildar_todas   
-    
-    params[:user_monitoring_shifts_ids].each do |shift_id|
-      @user_monitoring_shift = UserMonitoringShift.find(shift_id.to_i)
-      @week = @user_monitoring_shift.monitoring_shift
-      @monitoring_shifts = MonitoringShift.where(week_number: @week)
-      if @monitoring_shifts.include?(@user_monitoring_shift.monitoring_shift_id)
-      raise
-      end
-      @shifts_of_week = UserMonitoringShift.where()  
-      @user_monitoring_shift.update(available: true)          
-    end
-    authorize @user_monitoring_shift
-    redirect_to "/monitoring_shifts?query=#{@user_monitoring_shift.monitoring_shift.week_number}"
-    
-    
-
-  end
+  end  
 end

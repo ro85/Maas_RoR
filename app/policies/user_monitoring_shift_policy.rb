@@ -1,10 +1,12 @@
 class UserMonitoringShiftPolicy < ApplicationPolicy
   
   class Scope < Scope
-    if @user.admin?
-      scope.all
-    else
-      scope.where(user: @user)
+    def resolve
+      if @user.admin?
+        scope.all
+      else
+        scope.where(user: @user)
+      end
     end
   end
 

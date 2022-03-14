@@ -12,11 +12,7 @@ Rails.application.routes.draw do
     resources :weekday_setups, only: [:edit, :update]
   end
 
-  resources :monitoring_shifts do 
-    collection do
-      patch 'tildar_todas'
-    end
-  end
+  resources :monitoring_shifts
 
   resources :user_monitoring_shifts do
     collection do

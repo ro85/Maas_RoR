@@ -24,7 +24,7 @@
                 <td>
                   <div class="form-check">
                     <% if @user_monitoring_shift.available? %>
-                      <i class="fas fa-check-circle text-center"></i>
+                      <i class="fas fa-check-circle text-center" style="color: green; opacity: 0.6;"></i>
                     <% else %>
                                              
                     <% end %>                                  
@@ -53,38 +53,16 @@
       <table class="table table-hover">                 
         <tbody>                                           
           <%  @monitoring_shifts.where(date: @date).order(:id).each do |shift_info| %> 
-            <tr class="liquidaciones">           
-                          
-                <td><%= shift_info.start_hour.strftime('%R Hs') %> - <%= shift_info.end_hour.strftime('%R Hs') %></td>
-                <td><%#= shift_info.available %></td> 
-                <td>
-                  <% @user_monitoring_shift = UserMonitoringShift.where(user_id: current_user.id, monitoring_shift_id: shift_info.id).first %>
-                  <div class="form-check">
-                    <% if @user_monitoring_shift.available? %>
-                      <input class="form-check-input" type="checkbox" value="<%= @user_monitoring_shift.available %>" id="flexCheckDefault" data-available="<%= @user_monitoring_shift.available %>" data-id="<%= @user_monitoring_shift.id %>" checked>  
-                    <% else %>
-                      <input class="form-check-input" type="checkbox" value="<%= @user_monitoring_shift.available %>" id="flexCheckDefault" data-available="<%= @user_monitoring_shift.available %>" data-id="<%= @user_monitoring_shift.id %>">  
-                        
-                    <% end %>                                  
-                  </div>
-                </td>                
-                  
-                <% if @user_monitoring_shift.available? %>
-                  <td><%= check_box_tag 'user_monitoring_shifts_ids[]', @user_monitoring_shift.id, value: "1" %></td> 
-
-                <% else %>
-
-                  <td><%= check_box_tag 'user_monitoring_shifts_ids[]', @user_monitoring_shift.id %></td> 
-                  
-                <% end %>
-                  
-                
-                
-                <%#= simple_form_for shift_info, html: { id: "form", data: "#{shift_info.id}" }, url: monitoring_shift_path(shift_info), method: :PATCH do |f| %> 
-                
-                  <td><%#= f.check_box :available, label: false, id:"available_#{shift_info.id}" %></td>              
-                  <%#= f.submit :style => "display: none;" %>                
-                <%# end %>
+            <tr class="liquidaciones">                         
+              <td><%= shift_info.start_hour.strftime('%R Hs') %> - <%= shift_info.end_hour.strftime('%R Hs') %></td>                
+              <td>
+                <% @user_monitoring_shift = UserMonitoringShift.where(user_id: current_user.id, monitoring_shift_id: shift_info.id).first %>                  
+              </td>                  
+              <% if @user_monitoring_shift.available? %>
+                <td><%= check_box_tag 'user_monitoring_shifts_ids[]', @user_monitoring_shift.id, value: "1" %></td>
+              <% else %>
+                <td><%= check_box_tag 'user_monitoring_shifts_ids[]', @user_monitoring_shift.id %></td>                  
+              <% end %>                
             </tr> 
           <% end %>                               
         </tbody>         
