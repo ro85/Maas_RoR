@@ -105,6 +105,13 @@ class ContractsController < ApplicationController
     end
   end
 
+  def update
+    @contract = Contract.find(params[:id])
+    @contract.update(params_contract)
+    authorize @contract
+    redirect_to contract_path(@contract)
+  end
+
   private
   def params_contract
     params.require(:contract).permit(:client_name, :start_date,:end_date, :monday_start_hour, :monday_end_hour, :tuesday_start_hour, :tuesday_end_hour, :wednesday_start_hour, :wednesday_end_hour, :thursday_start_hour, :thursday_end_hour, :friday_start_hour, :friday_end_hour, :saturday_start_hour, :saturday_end_hour, :sunday_start_hour, :sunday_end_hour)
