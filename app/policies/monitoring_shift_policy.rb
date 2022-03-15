@@ -25,4 +25,8 @@ class MonitoringShiftPolicy < ApplicationPolicy
     true
   end
 
+  def calendar_confirmed?
+    true
+  end
+
 end

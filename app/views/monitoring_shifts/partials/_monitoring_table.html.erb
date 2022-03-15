@@ -31,9 +31,11 @@
                   </td>                      
                 <% else   %>
                   <% if @user_monitoring_shift.available? %>
-                    <td class="text-left mx-2"><%= check_box_tag 'user_monitoring_shifts_ids[]', @user_monitoring_shift.id, value: "1" %></td>
+                    <td class="text-left mx-2"><%= check_box_tag 'user_monitoring_shifts_ids[]', @user_monitoring_shift.id, value: "1" %></td>    
+                      <%= hidden_field_tag "false[user_monitoring_shifts_ids][]", @user_monitoring_shift.id %>                                   
                   <% else %>
-                    <td class="text-left mx-2"><%= check_box_tag 'user_monitoring_shifts_ids[]', @user_monitoring_shift.id %></td>                  
+                    <td class="text-left mx-2"><%= check_box_tag 'user_monitoring_shifts_ids[]', @user_monitoring_shift.id %></td>  
+                    <%= hidden_field_tag "false[user_monitoring_shifts_ids][]", @user_monitoring_shift.id %>                
                   <% end %>
                 <% end %>               
               <% end %>                
@@ -79,8 +81,10 @@
               <% else   %>
                 <% if @user_monitoring_shift.available? %>
                   <td><%= check_box_tag 'user_monitoring_shifts_ids[]', @user_monitoring_shift.id, value: "1" %></td>
+                  <%= hidden_field_tag "false[user_monitoring_shifts_ids][]", @user_monitoring_shift.id %>
                 <% else %>
-                  <td><%= check_box_tag 'user_monitoring_shifts_ids[]', @user_monitoring_shift.id %></td>                  
+                  <td><%= check_box_tag 'user_monitoring_shifts_ids[]', @user_monitoring_shift.id %></td>  
+                  <%= hidden_field_tag "false[user_monitoring_shifts_ids][]", @user_monitoring_shift.id %>                 
                 <% end %>   
 
               <% end %>                 

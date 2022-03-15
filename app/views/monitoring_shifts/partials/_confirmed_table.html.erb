@@ -1,0 +1,34 @@
+
+  <table>
+    <thead>
+      <tr>
+        <th><%= day.strftime('%A, %d de %B de %Y') %></th>
+        
+      </tr>
+      <table class="table table-hover">                 
+        <tbody>                                           
+          <%  @monitoring_shifts.where(date: @date).order(:id).each do |shift_info| %> 
+            <tr class="liquidaciones">                         
+              <td><%= shift_info.start_hour.strftime('%R Hs') %> - <%= shift_info.end_hour.strftime('%R Hs') %></td>                
+              <td>
+                <% @user_monitoring_shift = UserMonitoringShift.where(user_id: current_user.id, monitoring_shift_id: shift_info.id).first %>                  
+              </td> 
+              
+              <td>
+                <div class="form-check">
+                  <% if shift_info.user_id.nil? %>
+                  <td><%= shift_info.id %></td>
+                    <td><i class="fas fa-exclamation-triangle"></i></td>
+                  <% else %>
+                  <td><%= shift_info.id %></td>
+                    <td><%= shift_info.user.name.titleize %></td>                     
+                  <% end %>                             
+                </div>                
+              </td>                         
+                     
+            </tr> 
+          <% end %>                               
+        </tbody>         
+      </table>   
+    </thead>   
+  </table>  

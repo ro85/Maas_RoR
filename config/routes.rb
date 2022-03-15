@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :monitoring_shifts do
     collection do
       get 'set'
+      get 'calendar_confirmed'
     end
   end
 
