@@ -1,11 +1,10 @@
 <style>
   th, td{
     font-size: 12px;
+    
   }
 
-  th #user{
-    margin: 0px 4px;
-  }
+  
 </style>
 <h3>Contratos</h3>
 <hr>
@@ -25,34 +24,34 @@
               </button>                
             </div>
             <% if params[:query].present? %>
-              <p class="text-right mb-2"><%#= link_to "(#{@contracts.count}) Limpiar filtro", contracts_path, class:"text-decoration-none" %></p>
+              <p class="text-right mb-2 mt-2"><%= link_to "Limpiar filtro", monitoring_shifts_path, class:"text-decoration-none" %></p>
             <% end %>    
           <% end %>  
         </div>
         <div class= "bg-white p-4">
           <div class="d-flex justify-content-between">
-            <h5 class="ml-3 mr-5 my-2"><strong>Semana <%= params[:query] %> -  del <%#= @monitoring_shifts.first.date.strftime('%A, %d de %B de %Y') %> a <%#= @monitoring_shifts.last.date.strftime('%A, %d de %B de %Y')  %></strong></h5>             
-          </div>
-          <%= simple_form_for @monitoring_shift, url: mark_as_available_user_monitoring_shifts_path, remote: true, method: :patch do |f| %>
-            <div class="container">
-              <%= f.submit "Grabar", class:"btn btn-primary my-3" %>                            
-              <div class="row">
-                <div class="col-12 col-md-6 ">
-                  <% @dates.uniq.sort { |a, b| a <=> b }.each do |day| %>
-                    <% @date = day %>                                     
-                    <%= render '/monitoring_shifts/partials/monitoring_table', day: day %>
-                  <% end %>                  
-                </div>                           
-                <div class="col-12 col-md-6 ">                  
-                  <% @dates_weekend.uniq.sort { |a, b| a <=> b }.each do |day| %>
-                    <% @date = day %>                                     
-                    <%= render '/monitoring_shifts/partials/monitoring_table', day: day %>                      
-                  <% end %>                  
-                </div>                             
-                </div>
-              </div>             
+            <% if params[:query].present? && params[:query] != "semana" %>
+              <p class="ml-3 mr-5 "><strong>Semana <%= params[:query] %> -  del <%= @monitoring_shifts.first.date.strftime('%d/%m/%Y') %> a <%= @monitoring_shifts.last.date.strftime('%d/%m/%Y')  %></strong></p> 
+              <%= link_to "Editar Disponibilidad", "/monitoring_shifts/set?query=#{params[:query]}&button=", class:"btn btn-primary" %>    
+            <% end %>      
+          </div>          
+          <div class="container">                                    
+            <div class="row mt-3">
+              <div class="col-12 col-md-6 ">
+                <% @dates.uniq.sort { |a, b| a <=> b }.each do |day| %>
+                  <% @date = day %>                                     
+                  <%= render '/monitoring_shifts/partials/monitoring_table', day: day %>
+                <% end %>                  
+              </div>                           
+              <div class="col-12 col-md-6 ">                  
+                <% @dates_weekend.uniq.sort { |a, b| a <=> b }.each do |day| %>
+                  <% @date = day %>                                     
+                  <%= render '/monitoring_shifts/partials/monitoring_table', day: day %>                      
+                <% end %>                  
+              </div>                             
             </div>
-          <% end %>
+          </div>             
+        </div>          
       </div>
       <hr>  
       <%= link_to "Volver", contracts_path %>        

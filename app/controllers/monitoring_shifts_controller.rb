@@ -10,7 +10,7 @@ class MonitoringShiftsController < ApplicationController
       @weeks << shift.week_number      
     end 
     
-    if params[:query].present?     
+    if params[:query].present? && params[:query] != "semana"    
       sql_query = "monitoring_shifts.week_number ILIKE :query"
       @monitoring_shifts = policy_scope(MonitoringShift).where(week_number: params[:query].to_i)    
       @monitoring_shifts.each do |shift| 
@@ -30,6 +30,34 @@ class MonitoringShiftsController < ApplicationController
   def edit
     @monitoring_shift = MonitoringShift.find(params[:id])
     authorize @monitoring_shift
+  end
+
+  def set
+    @monitoring_shifts = MonitoringShift.all
+    authorize @monitoring_shifts
+    @weeks = ["semana"]  
+    @dates = []  
+    @dates_weekend = []
+    MonitoringShift.all.each do |shift|
+      @weeks << shift.week_number      
+    end 
+    
+    if params[:query].present? && params[:query] != "semana"
+      sql_query = "monitoring_shifts.week_number ILIKE :query"
+      @monitoring_shifts = MonitoringShift.where(week_number: params[:query].to_i)    
+      @monitoring_shifts.each do |shift| 
+        if shift.date.saturday? || shift.date.sunday?  
+          @dates_weekend << shift.date       
+        else
+          @dates << shift.date
+        end
+      end 
+      
+    else        
+      @monitoring_shifts = @monitoring_shifts.sort{|a, b| b <=> a}              
+    end   
+    @monitoring_shift = MonitoringShift.new
+
   end
 
   def update    
