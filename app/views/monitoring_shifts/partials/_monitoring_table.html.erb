@@ -1,54 +1,45 @@
-<% if current_user.admin? %>
-  <table>
-    <thead>
-      <tr>
-        <th><%= day.strftime('%A, %d de %B de %Y') %></th>            
+<% if current_user.admin? %>  
+  <table class="table table-hover">    
+    <thead>      
+      <tr>       
+        <th scope="col"><%= day.strftime('%A, %d de %B de %Y') %> </th>
+        <% User.where(dev: true).order(:id).each do |user| %>
+          <th scope="col" class="text-center"><%= user.name %></td>
+        <% end %>          
       </tr>
-      <tr>
-        <% if current_user.admin? %>
-        <th>Horarios </th>
+    </thead>          
+    <tbody>                                           
+      <% @monitoring_shifts.where(date: @date).order(:id).each do |shift_info| %> 
+        <tr>                         
+          <td>
+            <%= shift_info.start_hour.strftime('%R Hs') %> - <%= shift_info.end_hour.strftime('%R Hs') %>
+          </td>                
           <% User.where(dev: true).order(:id).each do |user| %>
-            <td class="text-center"><p class="mx-3"><%= user.name %></p></td>
-          <% end %>
-        <% end %>  
-      </tr>
-      <table class="table table-hover">                 
-        <tbody>                                           
-          <% @monitoring_shifts.where(date: @date).order(:id).each do |shift_info| %> 
-            <tr>                         
-              <td>
-                <%= shift_info.start_hour.strftime('%R Hs') %> - <%= shift_info.end_hour.strftime('%R Hs') %>
-              </td>                
-              <% User.where(dev: true).order(:id).each do |user| %>
-                <% @user_monitoring_shift = UserMonitoringShift.where(user_id: user.id, monitoring_shift_id: shift_info.id).first %>                
-                <% if request.path == monitoring_shifts_path  %> 
-                  <td>
-                    <div class="form-check">
-                      <% if @user_monitoring_shift.available? %>
-                        <i class="fas fa-check-circle text-center" style="color: green; opacity: 0.6;"></i>                                                                  
-                      <% end %>                                  
-                    </div>                      
-                  </td>                      
-                <% else   %>
+            <% @user_monitoring_shift = UserMonitoringShift.where(user_id: user.id, monitoring_shift_id: shift_info.id).first %>                
+            <% if request.path == monitoring_shifts_path  %> 
+              <td class="text-center">
+                <div class="form-check">
                   <% if @user_monitoring_shift.available? %>
-                    <td class="text-left mx-2"><%= check_box_tag 'user_monitoring_shifts_ids[]', @user_monitoring_shift.id, value: "1" %></td>    
-                      <%= hidden_field_tag "false[user_monitoring_shifts_ids][]", @user_monitoring_shift.id %>                                   
-                  <% else %>
-                    <td class="text-left mx-2"><%= check_box_tag 'user_monitoring_shifts_ids[]', @user_monitoring_shift.id %></td>  
-                    <%= hidden_field_tag "false[user_monitoring_shifts_ids][]", @user_monitoring_shift.id %>                
-                  <% end %>
-                <% end %>               
-              <% end %>                
-            </tr> 
-          <% end %>                               
-        </tbody>         
-      </table>   
-    </thead>   
-  </table>  
-
-
-<% else %>
-  <table>
+                    <i class="fas fa-check-circle text-center" style="color: green; opacity: 0.6;"></i>                                                                  
+                  <% end %>                                  
+                </div>                      
+              </td>                      
+            <% else   %>
+              <% if @user_monitoring_shift.available? %>
+                <td class="text-center" ><%= check_box_tag 'user_monitoring_shifts_ids[]', @user_monitoring_shift.id, value: "1" %></td>    
+                  <%= hidden_field_tag "false[user_monitoring_shifts_ids][]", @user_monitoring_shift.id %>                                   
+              <% else %>
+                <td class="text-center"><%= check_box_tag 'user_monitoring_shifts_ids[]', @user_monitoring_shift.id %></td>  
+                <%= hidden_field_tag "false[user_monitoring_shifts_ids][]", @user_monitoring_shift.id %>                
+              <% end %>
+            <% end %>               
+          <% end %>                
+        </tr> 
+      <% end %>                               
+    </tbody>         
+  </table> 
+<% else %> 
+  <table class="table table-hover"> 
     <thead>
       <tr>
         <th><%= day.strftime('%A, %d de %B de %Y') %></th>
@@ -57,42 +48,38 @@
             <th><%= user.name %></th>
           <% end %>       
         <% end %>      
-      </tr>
-      <table class="table table-hover">                 
-        <tbody>                                           
-          <%  @monitoring_shifts.where(date: @date).order(:id).each do |shift_info| %> 
-            <tr class="liquidaciones">                         
-              <td><%= shift_info.start_hour.strftime('%R Hs') %> - <%= shift_info.end_hour.strftime('%R Hs') %></td>                
-              <td>
-                <% @user_monitoring_shift = UserMonitoringShift.where(user_id: current_user.id, monitoring_shift_id: shift_info.id).first %>                  
-              </td> 
-              <% if request.path == monitoring_shifts_path  %> 
-                <td>
-                  <div class="form-check">
-                    <% if @user_monitoring_shift.available? %>
-                      <i class="fas fa-check-circle text-center" style="color: green; opacity: 0.6;"></i>
-                    <% else %>
-                                              
-                    <% end %>                                  
-                  </div>
-                
-                </td>
-                
-              <% else   %>
-                <% if @user_monitoring_shift.available? %>
-                  <td><%= check_box_tag 'user_monitoring_shifts_ids[]', @user_monitoring_shift.id, value: "1" %></td>
-                  <%= hidden_field_tag "false[user_monitoring_shifts_ids][]", @user_monitoring_shift.id %>
-                <% else %>
-                  <td><%= check_box_tag 'user_monitoring_shifts_ids[]', @user_monitoring_shift.id %></td>  
-                  <%= hidden_field_tag "false[user_monitoring_shifts_ids][]", @user_monitoring_shift.id %>                 
-                <% end %>   
+      </tr>   
+    </thead>             
+    <tbody>                                           
+      <%  @monitoring_shifts.where(date: @date).order(:id).each do |shift_info| %> 
+        <tr class="liquidaciones">                         
+          <td><%= shift_info.start_hour.strftime('%R Hs') %> - <%= shift_info.end_hour.strftime('%R Hs') %></td>                
+          <td>
+            <% @user_monitoring_shift = UserMonitoringShift.where(user_id: current_user.id, monitoring_shift_id: shift_info.id).first %>                  
+          </td> 
+          <% if request.path == monitoring_shifts_path  %> 
+            <td class="text-center">              
+              <% if @user_monitoring_shift.available? %>
+                <i class="fas fa-check-circle text-center" style="color: green; opacity: 0.6;"></i>
+              <% else %>
+                <i class="fas fa-times-circle" style="color: red; opacity: 0.6;"></i>                         
+              <% end %>                         
+            </td>            
+          <% else   %>
+            <% if @user_monitoring_shift.available? %>
+              <td><%= check_box_tag 'user_monitoring_shifts_ids[]', @user_monitoring_shift.id, value: "1" %></td>
+              <%= hidden_field_tag "false[user_monitoring_shifts_ids][]", @user_monitoring_shift.id %>
+            <% else %>
+              <td><%= check_box_tag 'user_monitoring_shifts_ids[]', @user_monitoring_shift.id %></td>  
+              <%= hidden_field_tag "false[user_monitoring_shifts_ids][]", @user_monitoring_shift.id %>                 
+            <% end %>   
 
-              <% end %>                 
-                           
-            </tr> 
-          <% end %>                               
-        </tbody>         
-      </table>   
-    </thead>   
-  </table>  
+          <% end %>                 
+                        
+        </tr> 
+      <% end %>                               
+    </tbody>         
+  </table>   
+      
+    
 <% end %>

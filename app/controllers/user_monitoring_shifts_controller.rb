@@ -5,7 +5,7 @@ class UserMonitoringShiftsController < ApplicationController
       @user_monitoring_shift = UserMonitoringShift.find(shift_id.to_i)
       @user_monitoring_shift.update(available: false)
     end
-    if  params[:user_monitoring_shifts_ids] != nil
+    if params[:user_monitoring_shifts_ids] != nil
       @true_user_shifts = []
       params[:user_monitoring_shifts_ids].each do |shift_id|
         @user_monitoring_shift = UserMonitoringShift.find(shift_id.to_i)
@@ -21,28 +21,32 @@ class UserMonitoringShiftsController < ApplicationController
   end
 
   def set_shift
-    @monitoring_shifts = MonitoringShift.where(week_number: @true_user_shifts.first.monitoring_shift.week_number)
-    @user_monitoring_shifts = []
-    @user_monitoring_shifts_ids = []
-    @monitoring_shifts.each do |shift|     
-      if UserMonitoringShift.where(monitoring_shift_id: shift.id).where(available: true) != nil
-        UserMonitoringShift.where(monitoring_shift_id: shift.id).where(available: true).each do |user_monitoring_shift|
-          @user_monitoring_shifts << user_monitoring_shift
-          @user_monitoring_shifts_ids << user_monitoring_shift.user_id
-        end       
-      end   
-    end       
-    @user_monitoring_shifts.each do |shift|  
-      if @user_monitoring_shifts.count == 1
-        shift.monitoring_shift.update(user_id: @user_monitoring_shifts.first.user_id)
-      elsif @user_monitoring_shifts.count >= 2     
-        @devs_id = @monitoring_shifts.group(:user_id).count               
-        @devs_id.each do |dev|                    
-          if (dev[0] != nil && @user_monitoring_shifts_ids.include?(dev[0])) && shift.monitoring_shift.user_id == dev[0] && shift.monitoring_shift.user_id != nil           
-            shift.monitoring_shift.update(user_id: dev[0])
-          end              
+    @monitoring_week_shifts = MonitoringShift.where(week_number: @true_user_shifts.first.monitoring_shift.week_number) 
+    @monitoring_week_shifts.order(:id).each do |monitoring_shift|   
+      @user_true_monitoring_shifts = []
+      @user_monitoring_shifts_ids = []  
+      if UserMonitoringShift.where(monitoring_shift_id: monitoring_shift.id).where(available: true).empty?
+        monitoring_shift.update(user_id: nil) 
+      else
+        UserMonitoringShift.where(monitoring_shift_id: monitoring_shift.id).where(available: true).each do |user_monitoring_shift|
+          @user_true_monitoring_shifts << user_monitoring_shift
+          @user_monitoring_shifts_ids << user_monitoring_shift.user_id   
+          if @user_true_monitoring_shifts.count == 1
+            monitoring_shift.update(user_id: @user_true_monitoring_shifts.first.user_id)
+          else
+            @user_true_monitoring_shifts.each do |user_true_monitoring_shift|              
+              @devs_id = @monitoring_week_shifts.group(:user_id).count.sort_by(&:last).to_h.keys    
+              @devs_id.each_with_index do |dev, position|                    
+                if dev != nil && user_true_monitoring_shift.id == user_true_monitoring_shift.monitoring_shift_id
+                  if position < @devs_id.index(user_true_monitoring_shift.monitoring_shift_id)                            
+                    user_true_monitoring_shift.monitoring_shift_id.update(user_id: dev)
+                  end
+                end              
+              end         
+            end
+          end                  
         end         
-      end
-    end
+      end    
+    end   
   end
 end
