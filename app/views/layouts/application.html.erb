@@ -12,14 +12,12 @@
   </head>
 
   <body>
-    <% if  request.path == "/"  %>
-      <%= render 'shared/navbar' %>
+    <% if  request.path == "/"  %>      
       <%= render 'shared/sidebar'%> 
       <%= render 'shared/flashes' %>
       <%= yield %>    
     <% else %>
-      <div>
-        <%#= render 'shared/navbar' %>      
+      <div>          
         <%= render 'shared/sidebar'%>        
         <%= render 'shared/flashes' %>
         </div>

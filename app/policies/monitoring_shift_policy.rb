@@ -21,7 +21,11 @@ class MonitoringShiftPolicy < ApplicationPolicy
     true
   end
 
-  def tildar_todas?
+  def set?
+    true
+  end
+
+  def calendar_confirmed?
     true
   end
 

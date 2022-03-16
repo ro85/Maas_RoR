@@ -7,7 +7,12 @@ Rails.application.routes.draw do
     resources :weekday_setups, only: [:edit, :update]
   end
 
-  resources :monitoring_shifts
+  resources :monitoring_shifts do
+    collection do
+      get 'set'
+      get 'calendar_confirmed'
+    end
+  end
 
   resources :user_monitoring_shifts do
     collection do

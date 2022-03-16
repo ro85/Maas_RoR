@@ -20,7 +20,7 @@
         <p class="link-text">Disponibilidad</p>         
         <i id="i-dash" class="fas fa-calendar-plus"></i>
       <% end %>
-      <%= link_to contracts_path, class:"navigator-item #{'navigator-item-active' if request.path == contracts_path} primero text-decoration-none text-dark d-flex navigator-border " do %>
+      <%= link_to  calendar_confirmed_monitoring_shifts_path, class:"navigator-item #{'navigator-item-active' if request.path == calendar_confirmed_monitoring_shifts_path} primero text-decoration-none text-dark d-flex navigator-border " do %>
         <p class="link-text">Turnos Confirmados</p>
         <i  id="i-dash" class="fas fa-calendar-check"></i>        
       <% end %>

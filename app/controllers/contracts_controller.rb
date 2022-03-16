@@ -83,7 +83,7 @@ class ContractsController < ApplicationController
         if date + @d == @contract.end_date
           break
         end  
-        @d += 1            
+        @d += 1                    
       end      
       redirect_to contract_path(@contract)
     else
