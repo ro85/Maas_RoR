@@ -20,7 +20,9 @@
               <td class="text-center">
                 <div class="form-check">
                   <% if @user_monitoring_shift.available? %>
-                    <i class="fas fa-check-circle text-center" style="color: green; opacity: 0.6;"></i>                                                                  
+                    <i class="fas fa-check-circle text-center" style="color: green; opacity: 0.6;"></i>
+                  <% else %>
+                    <i class="fas fa-times-circle" style="color: red; opacity: 0.6;"></i>                                                                    
                   <% end %>                                  
                 </div>                      
               </td>                      
@@ -43,20 +45,16 @@
     <thead>
       <tr>
         <th><%= day.strftime('%A, %d de %B de %Y') %></th>
-        <% if current_user.admin? %>
-          <% User.where(admin: false).each do |user| %>
-            <th><%= user.name %></th>
-          <% end %>       
-        <% end %>      
+        <th class="text-center">Disponibilidad</th>    
       </tr>   
     </thead>             
     <tbody>                                           
       <%  @monitoring_shifts.where(date: @date).order(:id).each do |shift_info| %> 
-        <tr class="liquidaciones">                         
-          <td><%= shift_info.start_hour.strftime('%R Hs') %> - <%= shift_info.end_hour.strftime('%R Hs') %></td>                
-          <td>
-            <% @user_monitoring_shift = UserMonitoringShift.where(user_id: current_user.id, monitoring_shift_id: shift_info.id).first %>                  
-          </td> 
+        <tr>                         
+          <td><%= shift_info.start_hour.strftime('%R Hs') %> - <%= shift_info.end_hour.strftime('%R Hs') %></td>               
+          
+          <% @user_monitoring_shift = UserMonitoringShift.where(user_id: current_user.id, monitoring_shift_id: shift_info.id).first %>                  
+          
           <% if request.path == monitoring_shifts_path  %> 
             <td class="text-center">              
               <% if @user_monitoring_shift.available? %>
@@ -67,10 +65,10 @@
             </td>            
           <% else   %>
             <% if @user_monitoring_shift.available? %>
-              <td><%= check_box_tag 'user_monitoring_shifts_ids[]', @user_monitoring_shift.id, value: "1" %></td>
+              <td class="text-center"><%= check_box_tag 'user_monitoring_shifts_ids[]', @user_monitoring_shift.id, value: "1" %></td>
               <%= hidden_field_tag "false[user_monitoring_shifts_ids][]", @user_monitoring_shift.id %>
             <% else %>
-              <td><%= check_box_tag 'user_monitoring_shifts_ids[]', @user_monitoring_shift.id %></td>  
+              <td class="text-center"><%= check_box_tag 'user_monitoring_shifts_ids[]', @user_monitoring_shift.id %></td>  
               <%= hidden_field_tag "false[user_monitoring_shifts_ids][]", @user_monitoring_shift.id %>                 
             <% end %>   
 
