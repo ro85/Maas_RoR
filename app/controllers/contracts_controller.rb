@@ -37,7 +37,7 @@ class ContractsController < ApplicationController
   end
 
   def create
-    @contract = Contract.new(params_contract)    
+    @contract = Contract.new(params_contract) 
     if @contract.save!
       authorize @contract      
       @d = 0     
@@ -45,38 +45,66 @@ class ContractsController < ApplicationController
       loop do                           
         case (date + @d).strftime('%A')                  
         when "Monday"
-          number_of_shift_per_day = (@contract.monday_end_hour.to_time.to_i - @contract.monday_start_hour.to_time.to_i)/60/60
+          if @contract.monday_end_hour.to_time == "2000-01-01 00:00:00 +0000" || @contract.monday_end_hour.to_time == "2000-01-01 23:59:00 +0000"
+            number_of_shift_per_day = ("2000-01-01 24:00:00 +0000".to_time.to_i - @contract.monday_start_hour.to_time.to_i)/60/60
+          else
+            number_of_shift_per_day = (@contract.monday_end_hour.to_time.to_i - @contract.monday_start_hour.to_time.to_i)/60/60
+          end
           @i = 0
           start_hour = @contract.monday_start_hour + (@i * 3600 )                   
-          loop_monitoring_shift(date, number_of_shift_per_day, @contract, start_hour)
+          loop_monitoring_shift(date, number_of_shift_per_day, @contract, start_hour)          
         when "Tuesday"
-          number_of_shift_per_day = (@contract.tuesday_end_hour.to_time.to_i - @contract.tuesday_start_hour.to_time.to_i)/60/60
-          @i = 0
+          if @contract.tuesday_end_hour.to_time == "2000-01-01 00:00:00 +0000" || @contract.tuesday_end_hour.to_time == "2000-01-01 23:59:00 +0000"
+            number_of_shift_per_day = ("2000-01-01 24:00:00 +0000".to_time.to_i - @contract.tuesday_start_hour.to_time.to_i)/60/60
+          else
+            number_of_shift_per_day = (@contract.tuesday_end_hour.to_time.to_i - @contract.tuesday_start_hour.to_time.to_i)/60/60
+          end
+            @i = 0
           start_hour = @contract.tuesday_start_hour + (@i * 3600) 
           loop_monitoring_shift(date, number_of_shift_per_day, @contract, start_hour)    
         when "Wednesday"
-          number_of_shift_per_day = (@contract.wednesday_end_hour.to_time.to_i - @contract.wednesday_start_hour.to_time.to_i)/60/60
-          @i = 0
+          if @contract.wednesday_end_hour.to_time == "2000-01-01 00:00:00 +0000" || @contract.wednesday_end_hour.to_time == "2000-01-01 23:59:00 +0000"
+            number_of_shift_per_day = ("2000-01-01 24:00:00 +0000".to_time.to_i - @contract.wednesday_start_hour.to_time.to_i)/60/60
+          else
+            number_of_shift_per_day = (@contract.wednesday_end_hour.to_time.to_i - @contract.wednesday_start_hour.to_time.to_i)/60/60
+          end
+            @i = 0
           start_hour = @contract.wednesday_start_hour + (@i * 3600) 
           loop_monitoring_shift(date, number_of_shift_per_day, @contract, start_hour)     
         when "Thursday"
-          number_of_shift_per_day = (@contract.thursday_end_hour.to_time.to_i - @contract.thursday_start_hour.to_time.to_i)/60/60
-          @i = 0
+          if @contract.thursday_end_hour.to_time == "2000-01-01 00:00:00 +0000" || @contract.thursday_end_hour.to_time == "2000-01-01 23:59:00 +0000"
+            number_of_shift_per_day = ("2000-01-01 24:00:00 +0000".to_time.to_i - @contract.thursday_start_hour.to_time.to_i)/60/60
+          else
+            number_of_shift_per_day = (@contract.thursday_end_hour.to_time.to_i - @contract.thursday_start_hour.to_time.to_i)/60/60
+          end
+            @i = 0
           start_hour = @contract.thursday_start_hour + (@i * 3600) 
           loop_monitoring_shift(date, number_of_shift_per_day, @contract, start_hour)            
         when "Friday"
-          number_of_shift_per_day = (@contract.friday_end_hour.to_time.to_i - @contract.friday_start_hour.to_time.to_i)/60/60
-          @i = 0
+          if @contract.friday_end_hour.to_time == "2000-01-01 00:00:00 +0000" || @contract.friday_end_hour.to_time == "2000-01-01 23:59:00 +0000"
+            number_of_shift_per_day = ("2000-01-01 24:00:00 +0000".to_time.to_i - @contract.friday_start_hour.to_time.to_i)/60/60
+          else
+            number_of_shift_per_day = (@contract.friday_end_hour.to_time.to_i - @contract.friday_start_hour.to_time.to_i)/60/60
+          end
+            @i = 0
           start_hour = @contract.friday_start_hour + (@i * 3600) 
           loop_monitoring_shift(date, number_of_shift_per_day, @contract, start_hour)      
         when "Saturday"
-          number_of_shift_per_day = (@contract.saturday_end_hour.to_time.to_i - @contract.saturday_start_hour.to_time.to_i)/60/60
-          @i = 0
+          if @contract.saturday_end_hour.to_time == "2000-01-01 00:00:00 +0000" || @contract.saturday_end_hour.to_time == "2000-01-01 23:59:00 +0000"
+            number_of_shift_per_day = ("2000-01-01 24:00:00 +0000".to_time.to_i - @contract.saturday_start_hour.to_time.to_i)/60/60
+          else
+            number_of_shift_per_day = (@contract.saturday_end_hour.to_time.to_i - @contract.saturday_start_hour.to_time.to_i)/60/60
+          end
+            @i = 0
           start_hour = @contract.saturday_start_hour + (@i * 3600) 
           loop_monitoring_shift(date, number_of_shift_per_day, @contract, start_hour)      
         when "Sunday"
-          number_of_shift_per_day = (@contract.sunday_end_hour.to_time.to_i - @contract.sunday_start_hour.to_time.to_i)/60/60
-          @i = 0
+          if @contract.sunday_end_hour.to_time == "2000-01-01 00:00:00 +0000" || @contract.sunday_end_hour.to_time == "2000-01-01 23:59:00 +0000"
+            number_of_shift_per_day = ("2000-01-01 24:00:00 +0000".to_time.to_i - @contract.sunday_start_hour.to_time.to_i)/60/60
+          else
+            number_of_shift_per_day = (@contract.sunday_end_hour.to_time.to_i - @contract.sunday_start_hour.to_time.to_i)/60/60
+          end
+            @i = 0
           start_hour = @contract.sunday_start_hour + (@i * 3600) 
           loop_monitoring_shift(date, number_of_shift_per_day, @contract, start_hour)
         end                                  

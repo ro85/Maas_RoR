@@ -1,7 +1,10 @@
 <style>
   th, td{
-    font-size: 12px;
-    
+    font-size: 12px; 
+
+    <% User.where(dev: true).each do |user| %>  
+      <%= "#user-#{user.id}{background-color: red!important;}" %>     
+    <% end %>
   }  
 </style>
 <h3>Contratos</h3>
@@ -10,51 +13,11 @@
   <div class="row">
     <div class="col-12 col-md-12">    
       <div class=" my-4">   
-        <div class="container p-0">            
-          <%= form_tag calendar_confirmed_monitoring_shifts_path, method: :get do %>
-            <div class="search-form-control form-group">   
-              <%= select_tag(:query_contract, options_for_select(@contracts.uniq),
-                class: "form-select string required mb-2",
-                id: "search_query")                         
-              %>  
-              <%= select_tag(:query, options_for_select(@weeks.uniq),
-                class: "form-select string required mb-2 ",
-                id: "search_query")                         
-              %>  
-              <button name="button" type="submit" class="btn btn-flat">
-                <i class="fas fa-search"></i> 
-              </button>                
-            </div>
-            <% if params[:query].present? %>
-              <p class="text-right mb-2 mt-2"><%= link_to "Limpiar filtro", monitoring_shifts_path, class:"text-decoration-none" %></p>
-            <% end %>    
-          <% end %>  
+        <div class="container p-0">
+          <%= render 'monitoring_shifts/partials/search_form' %>         
         </div>
         <div class= "bg-white p-4">
-          <div class="d-flex justify-content-between">
-            <% if params[:query].present? && params[:query] != "semana" %>
-              <div>
-                <p class="ml-3 mr-5 "><strong>Semana <%= params[:query] %> -  del <%= @monitoring_shifts.first.date.strftime('%d/%m/%Y') %> a <%= @monitoring_shifts.last.date.strftime('%d/%m/%Y')  %></strong></p>                
-              </div> 
-              <%= link_to "Editar Disponibilidad", "/monitoring_shifts/set?query=#{params[:query]}&button=", class:"btn btn-primary" %>    
-            <% end %>      
-          </div>
-          <% if params[:query].present? && params[:query] != "semana" %>
-            <div>
-              <% User.where(dev: true).each do |user| %>
-                <div class="d-flex mx-3">
-                  <p><%= user.name.titleize %></p>
-                  <p><%= MonitoringShift.where(week_number: params[:query]).where(user_id: user.id).count %></p>
-                </div>                 
-              <% end %>
-              <% if MonitoringShift.where(week_number: params[:query]).where(user_id: nil).count >= 1 %>
-                <div class="d-flex mx-3">
-                  <p class="mr-3">Sin Asignar</p>
-                  <p><%= MonitoringShift.where(week_number: params[:query]).where(user_id: nil).count %></p>
-                </div>
-              <% end %>
-            </div>  
-          <% end %>        
+          <%= render 'monitoring_shifts/partials/headers_calendar_confirmed' %>          
           <div class="container">                                    
             <div class="row mt-3">
               <div class="col-12 col-md-6 ">
@@ -78,3 +41,8 @@
     </div>    
   </div>    
 </div>
+
+<script>
+  const userTag = document.querySelctor.getElementById()
+
+</script>

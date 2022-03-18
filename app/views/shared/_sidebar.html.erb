@@ -6,21 +6,21 @@
         </a>
       </div>
     </div>
-    <div class="sidebar-info dropdown">
-      <%#= link_to profile_path, class:" text-decoration-none text-dark d-flex" do %>
-        <span class="info-name "><%= current_user.name.titleize %></span>
-      <%# end %>      
+    <div class="sidebar-info dropdown">      
+      <span class="info-name "><%= current_user.name.titleize %></span>          
     </div>
     <div class="navigator mt-4 px-4">
-      <%= link_to contracts_path, class:"navigator-item #{'navigator-item-active' if request.path == contracts_path} primero text-decoration-none text-dark d-flex navigator-border " do %>
-        <p class="link-text">Contratos</p>
-        <i id="i-dash" class="fas fa-bars"></i>      
-      <% end %>
-      <%= link_to monitoring_shifts_path, class:"navigator-item #{'navigator-item-active' if request.path == monitoring_shifts_path} primero text-decoration-none text-dark d-flex navigator-border " do %>
+      <% if current_user.admin? %>
+        <%= link_to contracts_path, class:"navigator-item #{'navigator-item-active' if request.path == contracts_path} primero text-decoration-none text-dark d-flex navigator-border " do %>
+          <p class="link-text">Contratos</p>
+          <i id="i-dash" class="fas fa-bars"></i>      
+        <% end %>      
+      <% end %>      
+      <%= link_to monitoring_shifts_path, class:"navigator-item #{'navigator-item-active' if request.path == monitoring_shifts_path || request.path == set_monitoring_shifts_path } #{'primero' if current_user.dev?} text-decoration-none text-dark d-flex navigator-border " do %>
         <p class="link-text">Disponibilidad</p>         
         <i id="i-dash" class="fas fa-calendar-plus"></i>
       <% end %>
-      <%= link_to  calendar_confirmed_monitoring_shifts_path, class:"navigator-item #{'navigator-item-active' if request.path == calendar_confirmed_monitoring_shifts_path} primero text-decoration-none text-dark d-flex navigator-border " do %>
+      <%= link_to  calendar_confirmed_monitoring_shifts_path, class:"navigator-item #{'navigator-item-active' if request.path == calendar_confirmed_monitoring_shifts_path} text-decoration-none text-dark d-flex navigator-border " do %>
         <p class="link-text">Turnos Confirmados</p>
         <i  id="i-dash" class="fas fa-calendar-check"></i>        
       <% end %>
