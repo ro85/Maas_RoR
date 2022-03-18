@@ -12,25 +12,32 @@
         <div class="container p-0">
           <%= render 'monitoring_shifts/partials/search_form' %>         
         </div>
-        <div class= "bg-white p-4">
-          <%= render 'monitoring_shifts/partials/headers_calendar_confirmed' %>          
-          <div class="container">                                    
-            <div class="row mt-3">
-              <div class="col-12 col-md-6 ">
-                <% @dates.uniq.sort { |a, b| a <=> b }.each do |day| %>
-                  <% @date = day %>                                     
-                  <%= render '/monitoring_shifts/partials/confirmed_table', day: day %>
-                <% end %>                  
-              </div>                           
-              <div class="col-12 col-md-6 ">                  
-                <% @dates_weekend.uniq.sort { |a, b| a <=> b }.each do |day| %>
-                  <% @date = day %>                                     
-                  <%= render '/monitoring_shifts/partials/confirmed_table', day: day %>                      
-                <% end %>                  
-              </div>                             
-            </div>
-          </div>             
-        </div>          
+        <% if params[:query].present? %>
+          <div class= "bg-white p-4">
+            <%= render 'monitoring_shifts/partials/headers_calendar_confirmed' %>          
+            <div class="container">                                    
+              <div class="row mt-3">
+                <div class="col-12 col-md-6 ">
+                  <% @dates.uniq.sort { |a, b| a <=> b }.each do |day| %>
+                    <% @date = day %>                                     
+                    <%= render '/monitoring_shifts/partials/confirmed_table', day: day %>
+                  <% end %>                  
+                </div>                           
+                <div class="col-12 col-md-6 ">                  
+                  <% @dates_weekend.uniq.sort { |a, b| a <=> b }.each do |day| %>
+                    <% @date = day %>                                     
+                    <%= render '/monitoring_shifts/partials/confirmed_table', day: day %>                      
+                  <% end %>                  
+                </div>                             
+              </div>
+            </div>             
+          </div>
+        <% else %>
+        <div class= "ml-4 mt-4">
+          <h5 class="ml-4">Seleccionar contrato y semana</h5>
+        </div>
+        <% end %>
+                  
       </div>
       <hr>  
       <%= link_to "Volver", contracts_path %>        
