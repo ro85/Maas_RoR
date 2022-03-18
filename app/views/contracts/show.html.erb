@@ -17,6 +17,12 @@
                   <h5 class="ml-3 mr-5 mt-2"><strong><%= @contract.id %> - <%= @contract.client_name.titleize %></strong></h5>                 
                 </div>               
               </tr>
+              <tr>
+                <td class="border-0"><strong>Desde: </strong><%= @contract.start_date.strftime('%d/%m/%Y') %></td>
+              </tr>
+              <tr>
+                <td class="border-0"><strong>Hasta: </strong><%= @contract.end_date.strftime('%d/%m/%Y') %></td>
+              </tr>
               <tr class="liquidaciones">                
                 <th>Dia</th>    
                 <th>Hora Inicio</th>              
@@ -51,4 +57,4 @@
     
   </div>    
 </div>
-<%= console %>
+

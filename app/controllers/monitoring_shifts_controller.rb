@@ -84,13 +84,21 @@ class MonitoringShiftsController < ApplicationController
   end
 
   def update    
-    @monitoring_shift = MonitoringShift.find(params[:id])     
-    if params[:monitoring_shift][:available] == "1"
-      @monitoring_shift.update(available: true)
+    @monitoring_shift = MonitoringShift.find(params[:id]) 
+    if params[:commit] == "Asignar"
+      @monitoring_shift.update(params_user)
+      @user_monitoring_shift = UserMonitoringShift.where(monitoring_shift_id: @monitoring_shift.id , user_id:@monitoring_shift.user_id )
+      @user_monitoring_shift.update(available: true)
+      redirect_to "/monitoring_shifts/calendar_confirmed?query_contract=#{@monitoring_shift.contract.client_name}&query=#{@monitoring_shift.week_number}&button="      
     else
-      @monitoring_shift.update(available: false)
+      if params[:monitoring_shift][:available] == "1"
+        @monitoring_shift.update(available: true)
+      else
+        @monitoring_shift.update(available: false)
+      end
+      redirect_to "/monitoring_shifts?query=#{@monitoring_shift.week_number}"
     end
-    redirect_to "/monitoring_shifts?query=#{@monitoring_shift.week_number}"
+    
         
     authorize @monitoring_shift
   end 
@@ -107,5 +115,9 @@ class MonitoringShiftsController < ApplicationController
     Contract.all.each do |contract|
       @contracts << contract.client_name      
     end 
+  end
+
+  def params_user
+    params.require(:monitoring_shift).permit(:user_id)
   end
 end

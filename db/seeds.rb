@@ -12,18 +12,22 @@ User.destroy_all
 
 
 admin = User.new(name:"Rodrigo", admin:true, email:"admin@mail.com", password:"123456", dev: false)
+admin.colour = admin.select_colour
 admin.save!
 p admin
 
 ernesto = User.new(name:"Ernesto", email:"ernesto@mail.com", password:"123456", dev: true)
+ernesto.colour = "#C65314"
 ernesto.save!
 p ernesto
 
 barbara = User.new(name:"Bárbara", email:"barbara@mail.com", password:"123456", dev: true)
+barbara.colour = "#89133E"
 barbara.save!
 p barbara
 
 benjamin = User.new(name:"Benjamín", email:"benjamin@mail.com", password:"123456", dev: true)
+benjamin.colour = "#485856"
 benjamin.save!
 p benjamin
 

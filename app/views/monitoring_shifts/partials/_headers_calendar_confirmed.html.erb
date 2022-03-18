@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-between">
+  <% if params[:query].present? && params[:query] != "semana" %>
+    <div>
+      <p class="ml-3 mr-5 "><strong>Semana <%= params[:query] %> -  del <%= @monitoring_shifts.order(:date).first.date.strftime('%d/%m/%Y') %> a <%= @monitoring_shifts.order(:date).last.date.strftime('%d/%m/%Y')  %></strong></p>                
+    </div> 
+    <%= link_to "Editar Disponibilidad", "/monitoring_shifts/set?query=#{params[:query]}&button=", class:"btn btn-primary" %>    
+  <% end %>      
+</div>
+<% if params[:query].present? && params[:query] != "semana" %>
+  <div>
+    <table class="table">
+      <% User.where(dev: true).each do |user| %>
+        <tr>
+        <th class="border-0"></th>
+          <th class="border-0 user-color" data-color=<%="#{user.colour}"%>><%= user.name.titleize %></th>
+          <th class="border-0"><%= MonitoringShift.where(week_number: params[:query]).where(user_id: user.id).count %></th> 
+          <div>
+            <th class="border-0"></th>       
+            <th class="border-0"></th>
+            <th class="border-0"></th>       
+            <th class="border-0"></th> 
+            <th class="border-0"></th>       
+            <th class="border-0"></th>
+            <th class="border-0"></th>    
+            <th class="border-0"></th> 
+            <th class="border-0"></th>       
+            <th class="border-0"></th>
+            <th class="border-0"></th>  
+            <th class="border-0"></th> 
+            <th class="border-0"></th>       
+            <th class="border-0"></th>
+            <th class="border-0"></th>     
+            <th class="border-0"></th>       
+            <th class="border-0"></th>      
+          </div>  
+        </tr>
+      <% end %>             
+      <% if MonitoringShift.where(week_number: params[:query]).where(user_id: nil).count >= 1 %>
+        <tr>
+        <th class="border-0"></th>
+          <th class="border-0">Sin Asignar</th>
+          <th class="border-0"><%= MonitoringShift.where(week_number: params[:query]).where(user_id: nil).count %></th>                
+        </tr>
+        
+      <% end %>
+    </table> 
+  </div>  
+<% end %> 

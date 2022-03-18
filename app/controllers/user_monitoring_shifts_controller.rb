@@ -51,13 +51,14 @@ class UserMonitoringShiftsController < ApplicationController
     
     @not_single_dev_monitoring_week_shifts.each do |monitoring_shift| 
       @devs_id = @monitoring_week_shifts.group(:user_id).count.sort_by(&:last).to_h.keys
+      @devs_id.delete(nil)
       @user_true_monitoring_shifts = []
       @user_monitoring_shifts_ids = []  
       if UserMonitoringShift.where(monitoring_shift_id: monitoring_shift.id).where(available: true).empty?
         monitoring_shift.update(user_id: nil) 
       else
         UserMonitoringShift.where(monitoring_shift_id: monitoring_shift.id).where(available: true).each do |user_monitoring_shift|                            
-          @devs_id.each_with_index do |dev, position|                    
+          @devs_id.each_with_index do |dev, position| 
             if dev != nil && user_monitoring_shift.monitoring_shift_id == monitoring_shift.id
               if @devs_id.exclude?(user_monitoring_shift.monitoring_shift.user_id)
                 MonitoringShift.find(user_monitoring_shift.monitoring_shift_id).update(user_id: user_monitoring_shift.user_id)
