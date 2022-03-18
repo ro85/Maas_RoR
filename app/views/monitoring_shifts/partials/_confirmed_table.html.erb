@@ -10,9 +10,11 @@
         <td id="monitoring_shift-<%=shift_info.user_id.nil? ? 'free' : 'confirmed'  %>"><%= shift_info.start_hour.strftime('%R Hs') %> - <%= shift_info.end_hour.strftime('%R Hs') %></td>       
         <% @user_monitoring_shift = UserMonitoringShift.where(user_id: current_user.id, monitoring_shift_id: shift_info.id).first %>                  
         <% if shift_info.user_id.nil? %>            
-          <td class=" text-center"><i class="fas fa-exclamation-triangle" style="color: orange; opacity: 0.8;"></i></td>
+          <td class=" text-center"><i class="fas fa-exclamation-triangle" style="color: orange; opacity: 0.8;" data-bs-toggle="modal" data-bs-target="#editModal-<%= shift_info.id %>"></i></td>
+          <%= render 'monitoring_shifts/partials/modal_assignation_dev', shift_info: shift_info %>          
         <% else %>            
-          <td class=" text-center user-color " data-color=<%= "#{ shift_info.user.colour}" %>><%= shift_info.user.name.titleize %></td>                     
+          <td class=" text-center user-color " data-color=<%= "#{ shift_info.user.colour}" %> data-bs-toggle="modal" data-bs-target="#editModal-<%= shift_info.id %>"><%= shift_info.user.name.titleize %></td>    
+          <%= render 'monitoring_shifts/partials/modal_assignation_dev', shift_info: shift_info %>                   
         <% end %>         
       </tr> 
     <% end %>                               
