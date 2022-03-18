@@ -80,27 +80,8 @@ ActiveRecord::Schema.define(version: 2022_03_18_121348) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "weekday_setups", force: :cascade do |t|
-    t.bigint "weekday_id", null: false
-    t.time "start_hour"
-    t.time "end_hour"
-    t.bigint "contract_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["contract_id"], name: "index_weekday_setups_on_contract_id"
-    t.index ["weekday_id"], name: "index_weekday_setups_on_weekday_id"
-  end
-
-  create_table "weekdays", force: :cascade do |t|
-    t.string "weekday"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   add_foreign_key "monitoring_shifts", "contracts"
   add_foreign_key "monitoring_shifts", "users"
   add_foreign_key "user_monitoring_shifts", "monitoring_shifts"
   add_foreign_key "user_monitoring_shifts", "users"
-  add_foreign_key "weekday_setups", "contracts"
-  add_foreign_key "weekday_setups", "weekdays"
 end

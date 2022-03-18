@@ -7,7 +7,7 @@
 <hr>
 <div class="container">  
   <div class="row">
-    <div class="col-12 col-md-7">    
+    <div class="col-12 col-md-10">    
       <div class=" my-4">   
         <div class= "bg-white p-4">     
           <table class="table table-hover">
@@ -46,6 +46,13 @@
                 <td></td>
                 <td class="text-center"><strong><%=@contract.total_hours_per_week %></strong></td>
                 <td></td>
+              </tr>    
+              <tr>
+                <td colspan=1><strong>Importe total del contrato</strong></td>                
+                <td colspan=2><small><%=number_to_currency(@contract.price_per_hour)%> x <%=@contract.monitoring_shifts.count %> hs totales</small></td>
+                
+                <td class="text-center"><strong><%=number_to_currency(@contract.monitoring_shifts.count * @contract.price_per_hour) %></strong></td>
+                <td></td>
               </tr>                
             </tbody>         
           </table>   
@@ -57,4 +64,3 @@
     
   </div>    
 </div>
-
