@@ -12,11 +12,15 @@
       <div class=" my-4">   
         <div class="container p-0">            
           <%= form_tag monitoring_shifts_path, method: :get do %>
-            <div class="search-form-control form-group">   
-              <%= select_tag(:query, options_for_select(@weeks.uniq),
+            <div class="d-flex m-0">    
+              <%= select_tag(:query_contract, options_for_select(@contracts.uniq),
                 class: "form-select string required ",
                 id: "search_query")                         
               %>  
+              <%= select_tag(:query, options_for_select(@weeks.uniq),
+                class: "form-select string required",
+                id: "search_query")                         
+              %>   
               <button name="button" type="submit" class="btn btn-flat">
                 <i class="fas fa-search"></i> 
               </button>                
@@ -26,30 +30,36 @@
             <% end %>    
           <% end %>  
         </div>
-        <div class= "bg-white p-4">
-          <div class="d-flex justify-content-between">
-            <% if params[:query].present? && params[:query] != "semana" %>
-              <p class="ml-3 mr-5 "><strong>Semana <%= params[:query] %> -  del <%= @monitoring_shifts.first.date.strftime('%d/%m/%Y') %> a <%= @monitoring_shifts.last.date.strftime('%d/%m/%Y')  %></strong></p> 
-              <%= link_to "Editar Disponibilidad", "/monitoring_shifts/set?query=#{params[:query]}&button=", class:"btn btn-primary" %>    
-            <% end %>      
-          </div>          
-          <div class="container">                                    
-            <div class="row mt-3">
-              <div class="col-12 col-md-6 ">
-                <% @dates.uniq.sort { |a, b| a <=> b }.each do |day| %>
-                  <% @date = day %>                                     
-                  <%= render '/monitoring_shifts/partials/monitoring_table', day: day %>
-                <% end %>                  
-              </div>                           
-              <div class="col-12 col-md-6 ">                  
-                <% @dates_weekend.uniq.sort { |a, b| a <=> b }.each do |day| %>
-                  <% @date = day %>                                     
-                  <%= render '/monitoring_shifts/partials/monitoring_table', day: day %>                      
-                <% end %>                  
-              </div>                             
-            </div>
-          </div>             
-        </div>          
+        <% if params[:query].present? %>        
+          <div class= "bg-white p-4">
+            <div class="d-flex justify-content-between">
+              <% if params[:query].present? && params[:query] != "semana" %>
+                <p class="ml-3 mr-5 "><strong>Semana <%= params[:query] %> -  del <%= @monitoring_shifts.first.date.strftime('%d/%m/%Y') %> a <%= @monitoring_shifts.last.date.strftime('%d/%m/%Y')  %></strong></p> 
+                <%= link_to "Editar Disponibilidad", "/monitoring_shifts/set?query=#{params[:query]}&button=", class:"btn btn-primary" %>    
+              <% end %>      
+            </div>          
+            <div class="container">                                    
+              <div class="row mt-3">
+                <div class="col-12 col-md-6 ">
+                  <% @dates.uniq.sort { |a, b| a <=> b }.each do |day| %>
+                    <% @date = day %>                                     
+                    <%= render '/monitoring_shifts/partials/monitoring_table', day: day %>
+                  <% end %>                  
+                </div>                           
+                <div class="col-12 col-md-6 ">                  
+                  <% @dates_weekend.uniq.sort { |a, b| a <=> b }.each do |day| %>
+                    <% @date = day %>                                     
+                    <%= render '/monitoring_shifts/partials/monitoring_table', day: day %>                      
+                  <% end %>                  
+                </div>                             
+              </div>
+            </div>             
+          </div>
+        <% else %>
+          <div class= "ml-4 mt-4">
+            <h5 class="ml-4">Seleccionar contrato y semana</h5>
+          </div>
+        <% end %>          
       </div>
       <hr>  
       <%= link_to "Volver", contracts_path %>        

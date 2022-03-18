@@ -4,12 +4,5 @@
   <td><%= (@contract.saturday_end_hour.strftime('%R').last(2) == "59" ? @contract.saturday_end_hour + 60 : @contract.saturday_end_hour).strftime('%R Hs') %></td>
   <td class="text-center">
     <%= @contract.total_hour_saturday %>           
-  </td>        
-  <td>
-    <!-- Button trigger modal -->   
-    <% if current_user.admin? %>
-      <i class="far fa-edit" data-bs-toggle="modal" data-bs-target="#editModal-<%= @contract.id %>"></i>
-    <% end %>
-    <%= render 'contracts/partials/modal_edit_contract' %>                                               
-  </td>           
+  </td>            
 </tr>          

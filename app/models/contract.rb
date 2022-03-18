@@ -1,8 +1,6 @@
-class Contract < ApplicationRecord
-  has_many :weekday_setups
+class Contract < ApplicationRecord 
   has_many :monitoring_shifts
-  accepts_nested_attributes_for :weekday_setups
-
+  
   validates :client_name, presence: true  
   validates :start_date, :end_date, presence: true
   validate :end_date_after_start_date
