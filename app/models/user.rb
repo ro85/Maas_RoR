@@ -10,4 +10,9 @@ class User < ApplicationRecord
 
   validates :name, presence: true  
 
+  def select_colour
+    rgb_digit = (1..255).to_a   
+    colour = "#{rgb_digit.sample},#{rgb_digit.sample},#{rgb_digit.sample}"
+  end
+
 end

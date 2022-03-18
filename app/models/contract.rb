@@ -16,31 +16,59 @@ class Contract < ApplicationRecord
   validate :start_finish_check_sunday
 
   def total_hour_monday
-    (self.monday_end_hour.to_time.to_i - self.monday_start_hour.to_time.to_i).abs/60/60
+    if self.monday_end_hour.to_time == "2000-01-01 00:00:00 +0000" || self.monday_end_hour.to_time == "2000-01-01 23:59:00 +0000"
+      ("2000-01-01 24:00:00 +0000".to_time.to_i - self.monday_start_hour.to_time.to_i)/60/60
+    else
+      (self.monday_end_hour.to_time.to_i - self.monday_start_hour.to_time.to_i).abs/60/60
+    end
   end
 
   def total_hour_tuesday
-    (self.tuesday_end_hour.to_time.to_i - self.tuesday_start_hour.to_time.to_i).abs/60/60
+    if self.tuesday_end_hour.to_time == "2000-01-01 00:00:00 +0000" || self.tuesday_end_hour.to_time == "2000-01-01 23:59:00 +0000"
+      ("2000-01-01 24:00:00 +0000".to_time.to_i - self.tuesday_start_hour.to_time.to_i)/60/60
+    else
+      (self.tuesday_end_hour.to_time.to_i - self.tuesday_start_hour.to_time.to_i).abs/60/60
+    end
   end
 
   def total_hour_wednesday
-    (self.wednesday_end_hour.to_time.to_i - self.wednesday_start_hour.to_time.to_i).abs/60/60
+    if self.wednesday_end_hour.to_time == "2000-01-01 00:00:00 +0000" || self.wednesday_end_hour.to_time == "2000-01-01 23:59:00 +0000"
+      ("2000-01-01 24:00:00 +0000".to_time.to_i - self.wednesday_start_hour.to_time.to_i)/60/60
+    else
+      (self.wednesday_end_hour.to_time.to_i - self.wednesday_start_hour.to_time.to_i).abs/60/60
+    end
   end
 
   def total_hour_thursday
-    (self.thursday_end_hour.to_time.to_i - self.thursday_start_hour.to_time.to_i).abs/60/60
+    if self.thursday_end_hour.to_time == "2000-01-01 00:00:00 +0000" || self.thursday_end_hour.to_time == "2000-01-01 23:59:00 +0000"
+      ("2000-01-01 24:00:00 +0000".to_time.to_i - self.thursday_start_hour.to_time.to_i)/60/60
+    else
+      (self.thursday_end_hour.to_time.to_i - self.thursday_start_hour.to_time.to_i).abs/60/60
+    end
   end  
 
   def total_hour_friday
-    (self.friday_end_hour.to_time.to_i - self.friday_start_hour.to_time.to_i).abs/60/60
+    if self.friday_end_hour.to_time == "2000-01-01 00:00:00 +0000" || self.friday_end_hour.to_time == "2000-01-01 23:59:00 +0000"
+      ("2000-01-01 24:00:00 +0000".to_time.to_i - self.friday_start_hour.to_time.to_i)/60/60
+    else
+      (self.friday_end_hour.to_time.to_i - self.friday_start_hour.to_time.to_i).abs/60/60
+    end
   end
 
   def total_hour_saturday
-    (self.saturday_end_hour.to_time.to_i - self.saturday_start_hour.to_time.to_i).abs/60/60
+    if self.saturday_end_hour.to_time == "2000-01-01 00:00:00 +0000" || self.saturday_end_hour.to_time == "2000-01-01 23:59:00 +0000"
+      ("2000-01-01 24:00:00 +0000".to_time.to_i - self.saturday_start_hour.to_time.to_i)/60/60
+    else
+      (self.saturday_end_hour.to_time.to_i - self.saturday_start_hour.to_time.to_i).abs/60/60
+    end
   end
 
   def total_hour_sunday
-    (self.saturday_end_hour.to_time.to_i - self.saturday_start_hour.to_time.to_i).abs/60/60
+    if self.sunday_end_hour.to_time == "2000-01-01 00:00:00 +0000" || self.sunday_end_hour.to_time == "2000-01-01 23:59:00 +0000"
+      ("2000-01-01 24:00:00 +0000".to_time.to_i - self.sunday_start_hour.to_time.to_i)/60/60
+    else
+      (self.sunday_end_hour.to_time.to_i - self.sunday_start_hour.to_time.to_i).abs/60/60
+    end
   end
 
   def total_hours_per_week

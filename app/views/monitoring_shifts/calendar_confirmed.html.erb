@@ -43,6 +43,9 @@
 </div>
 
 <script>
-  const userTag = document.querySelctor.getElementById()
+  const userTag = document.querySelectorAll(".user-color")
+  userTag.forEach(element => {
+    element.style.backgroundColor = element.dataset.color    
+  });
 
 </script>

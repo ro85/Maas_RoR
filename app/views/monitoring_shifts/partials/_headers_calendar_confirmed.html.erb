@@ -11,12 +11,33 @@
     <table class="table">
       <% User.where(dev: true).each do |user| %>
         <tr>
-          <th class="border-0 user-color" id="user-<%= user.id %>"><%= user.name.titleize %></th>
-          <th class="border-0"><%= MonitoringShift.where(week_number: params[:query]).where(user_id: user.id).count %></th>                
+        <th class="border-0"></th>
+          <th class="border-0 user-color" data-color=<%="#{user.colour}"%>><%= user.name.titleize %></th>
+          <th class="border-0"><%= MonitoringShift.where(week_number: params[:query]).where(user_id: user.id).count %></th> 
+          <div>
+            <th class="border-0"></th>       
+            <th class="border-0"></th>
+            <th class="border-0"></th>       
+            <th class="border-0"></th> 
+            <th class="border-0"></th>       
+            <th class="border-0"></th>
+            <th class="border-0"></th>    
+            <th class="border-0"></th> 
+            <th class="border-0"></th>       
+            <th class="border-0"></th>
+            <th class="border-0"></th>  
+            <th class="border-0"></th> 
+            <th class="border-0"></th>       
+            <th class="border-0"></th>
+            <th class="border-0"></th>     
+            <th class="border-0"></th>       
+            <th class="border-0"></th>      
+          </div>  
         </tr>
       <% end %>             
       <% if MonitoringShift.where(week_number: params[:query]).where(user_id: nil).count >= 1 %>
         <tr>
+        <th class="border-0"></th>
           <th class="border-0">Sin Asignar</th>
           <th class="border-0"><%= MonitoringShift.where(week_number: params[:query]).where(user_id: nil).count %></th>                
         </tr>

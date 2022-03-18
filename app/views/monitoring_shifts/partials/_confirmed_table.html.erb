@@ -1,23 +1,19 @@
 <table class="table table-hover">      
   <thead>
     <tr>
-      <th colspan=4 class="text-center date"><%= day.strftime('%A, %d de %B de %Y') %></th>   
+      <th colspan=4 class="text-center date-color"><%= day.strftime('%A, %d de %B de %Y') %></th>   
     </tr>
   </thead>        
   <tbody>                                           
     <%  @monitoring_shifts.where(date: @date).order(:id).each do |shift_info| %> 
       <tr>                         
-        <td id="monitoring_shift-<%=shift_info.user_id.nil? ? 'free' : 'confirmed'  %>"><%= shift_info.start_hour.strftime('%R Hs') %> - <%= shift_info.end_hour.strftime('%R Hs') %></td>                
-        <td>
-          <% @user_monitoring_shift = UserMonitoringShift.where(user_id: current_user.id, monitoring_shift_id: shift_info.id).first %>                  
-        </td>       
-        <td>          
-          <% if shift_info.user_id.nil? %>            
-            <td class=" text-center"><i class="fas fa-exclamation-triangle" style="color: orange; opacity: 0.8;"></i></td>
-          <% else %>            
-            <td class=" text-center" id=<%= "user-#{ shift_info.user.id}" %>><%= shift_info.user.name.titleize %></td>                     
-          <% end %>                     
-        </td>               
+        <td id="monitoring_shift-<%=shift_info.user_id.nil? ? 'free' : 'confirmed'  %>"><%= shift_info.start_hour.strftime('%R Hs') %> - <%= shift_info.end_hour.strftime('%R Hs') %></td>       
+        <% @user_monitoring_shift = UserMonitoringShift.where(user_id: current_user.id, monitoring_shift_id: shift_info.id).first %>                  
+        <% if shift_info.user_id.nil? %>            
+          <td class=" text-center"><i class="fas fa-exclamation-triangle" style="color: orange; opacity: 0.8;"></i></td>
+        <% else %>            
+          <td class=" text-center user-color " data-color=<%= "#{ shift_info.user.colour}" %>><%= shift_info.user.name.titleize %></td>                     
+        <% end %>         
       </tr> 
     <% end %>                               
   </tbody>         
