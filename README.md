@@ -50,6 +50,8 @@ $ rails db:seed
 
 ## Credenciales
 
+A modo de pruebas puede ingresar a [maas-ror](https://maas-ror.herokuapp.com)
+
 Credenciales del seed
 ```
 * Admin role:
@@ -60,5 +62,6 @@ Credenciales del seed
     email: dev@mail.com
     password: 123456
 ```
+
 ## Licencia
 [MIT](https://choosealicense.com/licenses/mit/)
