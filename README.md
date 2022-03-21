@@ -17,7 +17,7 @@ Pudiendo luego el administrador reasignar turnos según conveniencia y cambios d
 
 ### Screenshot
 
-![Shifts](https://github.com/ro85/Maas_RoR/tree/master/app/assets/images/set_shift.png?raw=true)
+![Shifts](/images/set_shift.png?raw=true)
 
 ## Tecnologias
 
@@ -46,7 +46,7 @@ $ rails db:seed
 
 ## Estructura
 
-![Schema](https://github.com/ro85/Maas_RoR/tree/master/app/assets/images/schema.jpg?raw=true)
+![Schema](/images/schema.jpg?raw=true)
 
 ## Credenciales
 
