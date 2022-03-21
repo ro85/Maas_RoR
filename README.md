@@ -11,12 +11,13 @@ Challenge para recorrido.cl
 
 
 ### Información General
-Software que permite coordinar y asignar los turnos de guardia de monitoreo de manera automatica y equitativa entre todos los miembros del equipo.
+Software que permite coordinar y asignar los turnos de guardia de monitoreo de manera automática y equitativa entre todos los miembros del equipo.
 Mediante la creacion de contratos por parte del administrador según las especificaciones de cada cliente, se le habilitara a cada usuario con el rol de dev una agenda con los horarios para cada contrato para que se inscriba como disponible para cubrir el turno que luego seran asignados de manera automática y equitativa.
+Pudiendo luego el administrador reasignar turnos según conveniencia y cambios de disponibilidades.
 
 ### Screenshot
 
-![Turnos](https://github.com/ro85/Maas_RoR/tree/master/app/assets/images/set_shift.png)
+![Shifts](https://github.com/ro85/Maas_RoR/tree/master/app/assets/images/set_shift.png?raw=true)
 
 ## Tecnologias
 
@@ -24,7 +25,7 @@ Tecnologías utilizadas en el proyecto:
 * [Rails]: Version 6.0.4.6 
 * [Ruby]: Version 2.6.6p146
 * [Node.js]: Version 8
-* [Database]: Postgresql
+* Postgresql
 
 ## Instalación
 
@@ -45,7 +46,7 @@ $ rails db:seed
 
 ## Estructura
 
-![Schema](https://github.com/ro85/Maas_RoR/tree/master/app/assets/images/schema.png)
+![Schema](https://github.com/ro85/Maas_RoR/tree/master/app/assets/images/schema.jpg?raw=true)
 
 ## Credenciales
 
