@@ -16,7 +16,8 @@ class ContractsController < ApplicationController
     else
       @contracts = policy_scope(Contract)
       @contracts =  @contracts.order('id DESC')
-    end       
+    end 
+    @contract = Contract.new      
   end
 
   def show
@@ -29,7 +30,7 @@ class ContractsController < ApplicationController
     authorize @contract    
   end
 
-  def create
+  def create    
     @contract = Contract.new(params_contract) 
     if @contract.save!
       authorize @contract      
