@@ -1,23 +1,22 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   #before_action :configure_sign_up_params, only: [:create]
   #before_action :configure_account_update_params, only: [:update]
-
+  
   # GET /resource/sign_up
   def new    
     @user = User.new
   end
 
   # POST /resource
-  def create    
-  @user = User.new(sign_up_users_params) 
-  @user.colour = @user.select_colour 
-  if @user.save!    
-    end
-    flash[:notice] = "Usuario creado exitosamente. Ingrese sus credenciales."
-    redirect_to root_path
-  else 
-    render :new
-  end    
+  def create      
+    @user = User.new(sign_up_users_params) 
+    @user.colour = @user.select_colour 
+    if @user.save!      
+      flash[:notice] = "Usuario creado exitosamente. Ingrese sus credenciales."
+      redirect_to root_path
+    else 
+      render :new
+    end    
   end
 
   # GET /resource/edit
@@ -69,11 +68,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   private
 
   def sign_up_users_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :admin)
   end
 
   def params_user
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :admin)
   end
 
 end
