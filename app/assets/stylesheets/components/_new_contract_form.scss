@@ -1,0 +1,11 @@
+#contract_monday_start_hour, #contract_tuesday_start_hour, #contract_wednesday_start_hour, #contract_thursday_start_hour, #contract_friday_start_hour, #contract_saturday_start_hour, #contract_sunday_start_hour, #contract_monday_end_hour, #contract_tuesday_end_hour, #contract_wednesday_end_hour, #contract_thursday_end_hour, #contract_friday_end_hour, #contract_saturday_end_hour, #contract_sunday_end_hour{
+    
+  width: 220px!important;
+}
+
+
+@media (max-width: 768px) {
+  #contract_monday_start_hour, #contract_tuesday_start_hour, #contract_wednesday_start_hour, #contract_thursday_start_hour, #contract_friday_start_hour, #contract_saturday_start_hour, #contract_sunday_start_hour, #contract_monday_end_hour, #contract_tuesday_end_hour, #contract_wednesday_end_hour, #contract_thursday_end_hour, #contract_friday_end_hour, #contract_saturday_end_hour, #contract_sunday_end_hour{
+    width: 100%!important;
+  }
+}
