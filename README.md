@@ -17,7 +17,7 @@ Pudiendo luego el administrador reasignar turnos según conveniencia y cambios d
 
 ### Screenshot
 
-![Shifts](/images/set_shift.png?raw=true)
+<img src="/app/assets/images/set_shift.png" alt="set_shift">
 
 ## Tecnologias
 
@@ -46,7 +46,7 @@ $ rails db:seed
 
 ## Estructura
 
-![Schema](/images/schema.jpg?raw=true)
+<img src="/app/assets/images/schema.jpg" alt="schema">
 
 ## Credenciales
 
